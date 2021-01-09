@@ -1,2 +1,3 @@
-# philips-hue-jn5168-remote
-Adjusting firmware examples for JN5168 to work as a Philips Hue remote device.
+# Philips Hue JN5168 Remote
+
+Please read the [wiki](https://github.com/GillisDeNeef/philips-hue-jn5168-remote/wiki/Introduction) for more information regarding this project.
