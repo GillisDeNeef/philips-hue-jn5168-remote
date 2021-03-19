@@ -1973,6 +1973,58 @@
 </instance>
 <instance id="0.876190861.2112005733.993807050.1593157031.81810401.2121998481;0.876190861.2112005733.993807050.1593157031.81810401.2121998481.;com.beyondsemi.tool.gnu.ba.elf.compiler.c.base.35671983;com.beyondsemi.base.ba.elf.c.compiler.input.2128446903">
 <collector id="org.eclipse.cdt.make.core.PerProjectSICollector">
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Platform/Common/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Platform/DK2/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/Common/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source"/>
+<includePath path="C:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller"/>
+<includePath path="C:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Controller_NonColorController/Source"/>
+<includePath path="C:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common/Source"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/Utilities/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/OVLY/Include" removed="true"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/LightLink/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/LBI"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/AppApi/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/MAC/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/MiniMac/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/MMAC/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/HardwareApi/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/Aes/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/DBG/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/MicroSpecific/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/MiniMAC/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/TimerServer/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/Random/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZPSMAC_Mini/Include" removed="true"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/OS/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/PWRM/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZPSTSV/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/AES_SW/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/PDUM/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZPSAPL/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/PDM_EEPROM/Include" removed="true"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZPSZLL_ZED/Include" removed="true"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZPSNWK_ZED/Include" removed="true"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/PDM/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZPSMAC/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZPSNWK/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Source"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/General/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/General/Source"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/Lighting/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/MeasurementAndSensing/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/EnergyAtHome/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/SE/Include" removed="true"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/GreenPower/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/HVAC/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/OTA/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/SmartEnergy/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/IAS/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Profiles/HA/Common/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Profiles/HA/Generic/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Profiles/ZLL/Include"/>
+<includePath path="C:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Profiles/GP/Include"/>
 <includePath path="c:\nxp\bstudio_nxp\sdk\tools\ba-elf-ba2-r36379\bin\../lib/gcc/ba-elf/4.7.4/include"/>
 <includePath path="c:\nxp\bstudio_nxp\sdk\tools\ba-elf-ba2-r36379\bin\../lib/gcc/ba-elf/4.7.4/include-fixed"/>
 <includePath path="c:\nxp\bstudio_nxp\sdk\tools\ba-elf-ba2-r36379\bin\../lib/gcc/ba-elf/4.7.4/../../../../ba-elf/include"/>
@@ -2188,6 +2240,53 @@
 <definedSymbol symbol="__BA_ADDC__=1"/>
 <definedSymbol symbol="__BA_SUBB__=1"/>
 <definedSymbol symbol="__ELF__=1"/>
+<definedSymbol symbol="DBG_ENABLE=1"/>
+<definedSymbol symbol="NEVER_DEEP_SLEEP=FALSE"/>
+<definedSymbol symbol="RTOS_PRESENT=1"/>
+<definedSymbol symbol="Controller_NonColorController=1"/>
+<definedSymbol symbol="PDM_USER_SUPPLIED_ID=1"/>
+<definedSymbol symbol="DEBUG_ZCL=1"/>
+<definedSymbol symbol="DEBUG_CLD_ONOFF=1"/>
+<definedSymbol symbol="DEBUG_CAPTOUCH=1"/>
+<definedSymbol symbol="DEBUG_APP_BUTTON=1"/>
+<definedSymbol symbol="DEBUG_START_UP=1"/>
+<definedSymbol symbol="DEBUG_REMOTE_NODE=1"/>
+<definedSymbol symbol="DEBUG_REMOTE_TASK=1"/>
+<definedSymbol symbol="DEBUG_SCAN=1"/>
+<definedSymbol symbol="DEBUG_JOIN=1"/>
+<definedSymbol symbol="DEBUG_COMMISSION=1"/>
+<definedSymbol symbol="DEBUG_CLASSIC_JOIN=1"/>
+<definedSymbol symbol="DEBUG_LIGHT_AGE=1"/>
+<definedSymbol symbol="DEBUG_EXCEPTIONS=1"/>
+<definedSymbol symbol="DEBUG_REJOIN=1"/>
+<definedSymbol symbol="DEBUG_SLEEP=1"/>
+<definedSymbol symbol="JN516x=5160"/>
+<definedSymbol symbol="JN5168=5168"/>
+<definedSymbol symbol="JENNIC_CHIP_NAME=_JN5168"/>
+<definedSymbol symbol="JENNIC_CHIP_FAMILY_NAME=_JN516x"/>
+<definedSymbol symbol="WATCHDOG_ENABLED=1"/>
+<definedSymbol symbol="JENNIC_HW_BBC_RXINCCA=1"/>
+<definedSymbol symbol="JENNIC_HW_BBC_DMA=1"/>
+<definedSymbol symbol="JENNIC_HW_BBC_ISA=0"/>
+<definedSymbol symbol="JENNIC_SW_EXTERNAL_FLASH=0"/>
+<definedSymbol symbol="JN516X_DMA_UART_BACKWARDS_COMPATIBLE_API=1"/>
+<definedSymbol symbol="UART_BACKWARDS_COMPATIBLE_API=1"/>
+<definedSymbol symbol="JENNIC_CHIP=JN5168"/>
+<definedSymbol symbol="JENNIC_CHIP_JN5168=1"/>
+<definedSymbol symbol="JENNIC_CHIP_FAMILY=JN516x"/>
+<definedSymbol symbol="JENNIC_CHIP_FAMILY_JN516x=1"/>
+<definedSymbol symbol="JENNIC_STACK_ZLLHA=1"/>
+<definedSymbol symbol="JENNIC_MAC_MiniMacShim=1"/>
+<definedSymbol symbol="EMBEDDED=1"/>
+<definedSymbol symbol="JENNIC_PCB=DEVKIT2"/>
+<definedSymbol symbol="JENNIC_PCB_DEVKIT2=1"/>
+<definedSymbol symbol="PDM_EEPROM=1"/>
+<definedSymbol symbol="ZPS_APL_OPT_SINGLE_INSTANCE=1"/>
+<definedSymbol symbol="OTA_NO_CERTIFICATE=1"/>
+<definedSymbol symbol="PLME_SAP=1"/>
+<definedSymbol symbol="__OPTIMIZE_SIZE__=1"/>
+<definedSymbol symbol="__OPTIMIZE__=1"/>
+<definedSymbol symbol="__BA_SIXTEEN_REGS__=1"/>
 </collector>
 </instance>
 <instance id="0.876190861.2112005733.993807050.1593157031.81810401.2121998481.2125498215;0.876190861.2112005733.993807050.1593157031.81810401.2121998481.2125498215.;com.beyondsemi.tool.gnu.ba.elf.compiler.c.base.1643284239;com.beyondsemi.base.ba.elf.c.compiler.input.1441342552">

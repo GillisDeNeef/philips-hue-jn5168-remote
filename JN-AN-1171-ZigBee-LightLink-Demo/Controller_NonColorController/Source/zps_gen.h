@@ -6,7 +6,7 @@
  *
  * COMPONENT:      zps_gen.h
  *
- * DATE:           Fri Mar 19 19:41:41 2021
+ * DATE:           Fri Mar 19 20:13:19 2021
  *
  * AUTHOR:         Jennic Zigbee Protocol Stack Configuration Tool
  *
@@ -157,95 +157,12 @@
 /* Endpoints */
 #define COORDINATOR_ZDO_ENDPOINT    (0)
 
-/* Node 'Light_ExtendedColorLight' */
-
-/* Endpoints */
-#define LIGHT_EXTENDEDCOLORLIGHT_ZDO_ENDPOINT    (0)
-#define LIGHT_EXTENDEDCOLORLIGHT_LIGHT_ENDPOINT    (1)
-#define LIGHT_EXTENDEDCOLORLIGHT_COMMISSION_ENDPOINT    (2)
-
-/* Node 'Light_DimmableLight' */
-
-/* Endpoints */
-#define LIGHT_DIMMABLELIGHT_ZDO_ENDPOINT    (0)
-#define LIGHT_DIMMABLELIGHT_LIGHT_ENDPOINT    (1)
-#define LIGHT_DIMMABLELIGHT_COMMISSION_ENDPOINT    (2)
-
-/* Node 'Light_DimmablePlug' */
-
-/* Endpoints */
-#define LIGHT_DIMMABLEPLUG_ZDO_ENDPOINT    (0)
-#define LIGHT_DIMMABLEPLUG_PLUG_ENDPOINT    (1)
-#define LIGHT_DIMMABLEPLUG_COMMISSION_ENDPOINT    (2)
-
-/* Node 'Light_ColorTemperatureLight' */
-
-/* Endpoints */
-#define LIGHT_COLORTEMPERATURELIGHT_ZDO_ENDPOINT    (0)
-#define LIGHT_COLORTEMPERATURELIGHT_LIGHT_ENDPOINT    (1)
-#define LIGHT_COLORTEMPERATURELIGHT_COMMISSION_ENDPOINT    (2)
-
-/* Node 'Light_OnOffLight' */
-
-/* Endpoints */
-#define LIGHT_ONOFFLIGHT_ZDO_ENDPOINT    (0)
-#define LIGHT_ONOFFLIGHT_LIGHT_ENDPOINT    (1)
-#define LIGHT_ONOFFLIGHT_COMMISSION_ENDPOINT    (2)
-
-/* Node 'Light_OnOffPlug' */
-
-/* Endpoints */
-#define LIGHT_ONOFFPLUG_ZDO_ENDPOINT    (0)
-#define LIGHT_ONOFFPLUG_PLUG_ENDPOINT    (1)
-#define LIGHT_ONOFFPLUG_COMMISSION_ENDPOINT    (2)
-
-/* Node 'Light_ColorLight' */
-
-/* Endpoints */
-#define LIGHT_COLORLIGHT_ZDO_ENDPOINT    (0)
-#define LIGHT_COLORLIGHT_LIGHT_ENDPOINT    (1)
-#define LIGHT_COLORLIGHT_COMMISSION_ENDPOINT    (2)
-
-/* Node 'OTAServer' */
-
-/* Endpoints */
-#define OTASERVER_ZDO_ENDPOINT    (0)
-#define OTASERVER_OTASERVEREP_ENDPOINT    (2)
-
-/* Node 'Controller_ColorSceneController' */
-
-/* Endpoints */
-#define CONTROLLER_COLORSCENECONTROLLER_ZDO_ENDPOINT    (0)
-#define CONTROLLER_COLORSCENECONTROLLER_REMOTE_ENDPOINT    (1)
-#define CONTROLLER_COLORSCENECONTROLLER_COMMISSION_ENDPOINT    (2)
-
-/* Node 'Controller_ColorController' */
-
-/* Endpoints */
-#define CONTROLLER_COLORCONTROLLER_ZDO_ENDPOINT    (0)
-#define CONTROLLER_COLORCONTROLLER_REMOTE_ENDPOINT    (1)
-#define CONTROLLER_COLORCONTROLLER_COMMISSION_ENDPOINT    (2)
-
 /* Node 'Controller_NonColorController' */
 
 /* Endpoints */
 #define CONTROLLER_NONCOLORCONTROLLER_ZDO_ENDPOINT    (0)
 #define CONTROLLER_NONCOLORCONTROLLER_REMOTE_ENDPOINT    (1)
 #define CONTROLLER_NONCOLORCONTROLLER_COMMISSION_ENDPOINT    (2)
-
-/* Node 'Controller_NonColorSceneController' */
-
-/* Endpoints */
-#define CONTROLLER_NONCOLORSCENECONTROLLER_ZDO_ENDPOINT    (0)
-#define CONTROLLER_NONCOLORSCENECONTROLLER_REMOTE_ENDPOINT    (1)
-#define CONTROLLER_NONCOLORSCENECONTROLLER_COMMISSION_ENDPOINT    (2)
-
-/* Node 'Controller_OnOffSensor' */
-
-/* Endpoints */
-#define CONTROLLER_ONOFFSENSOR_ZDO_ENDPOINT    (0)
-#define CONTROLLER_ONOFFSENSOR_REMOTE_ENDPOINT    (1)
-#define CONTROLLER_ONOFFSENSOR_COMMISSION_ENDPOINT    (2)
 
 /****************************************************************************/
 /***        Type Definitions                                              ***/

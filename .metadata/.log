@@ -65,3 +65,9 @@ java.io.IOException: Success
 	at com.nxp.jennic.eclipse.jmp.launch.ProgramJob.task(ProgramJob.java:82)
 	at com.nxp.jennic.eclipse.jmp.launch.ProgrammerJob.run(ProgrammerJob.java:106)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.cdt.core 1 0 2021-03-19 20:09:41.788
+!MESSAGE Indexed 'JN-AN-1171-ZigBee-LightLink-Demo' (15 sources, 49 headers) in 0,56 sec: 3.531 declarations; 8.795 references; 97 unresolved inclusions; 12 syntax errors; 1.633 unresolved names (11,70%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2021-03-19 20:09:48.383
+!MESSAGE Indexed 'JN-AN-1171-ZigBee-LightLink-Demo' (15 sources, 104 headers) in 0,99 sec: 13.018 declarations; 22.796 references; 0 unresolved inclusions; 0 syntax errors; 6 unresolved names (0,02%)

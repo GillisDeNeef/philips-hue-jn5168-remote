@@ -1,4 +1,4 @@
-19:41:32 **** Build of configuration Controller_NonColorController for project JN-AN-1171-ZigBee-LightLink-Demo ****
+20:13:13 **** Build of configuration Controller_NonColorController for project JN-AN-1171-ZigBee-LightLink-Demo ****
 make REMOTE=Controller_NonColorController all 
 JENNIC_MAC is Mini MAC shim 
 Building trace version ...
@@ -586,5 +586,5 @@ Linking /c/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Controller
 Generating binary ...
 /c/NXP/bstudio_nxp/sdk/Tools/ba-elf-ba2-r36379/bin/ba-elf-objcopy -j .version -j .bir -j .flashheader -j .vsr_table -j .vsr_handlers  -j .rodata -j .text -j .data -j .bss -j .heap -j .stack -S -O binary /c/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Controller_NonColorController/Build/Controller_NonColorController_JN5168.elf /c/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Controller_NonColorController/Build/Controller_NonColorController_JN5168.bin
 
-19:42:45 Build Finished (took 1m:12s.814ms)
+20:14:20 Build Finished (took 1m:7s.195ms)
 
