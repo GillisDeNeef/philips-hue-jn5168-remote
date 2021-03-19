@@ -133,6 +133,20 @@ PUBLIC void vAppRemoveAllGroups(bool_t bBroadcast);
 PUBLIC void bAppSendGroupMembershipReq(uint8 u8GroupCount, bool_t bBroadcast);
 PUBLIC void bAppSendViewGroupReq(uint16 u16GroupId, bool_t bBroadcast);
 
+
+#ifdef CLD_SCENES
+PUBLIC void vAppRemoveSceneById(uint8 u8SceneId, uint16 u16GroupId);
+PUBLIC void vAppRemoveAllScene(uint16 u16GroupId);
+PUBLIC void vAppGetSceneMembership(uint16 u16GroupId);
+PUBLIC void vAppRecallSceneById(uint8 u8SceneId, uint16 u16GroupId);
+PUBLIC void vAppAddScene(uint8 u8SceneId, uint16 u16GroupId, uint16 u16TransitionTime);
+PUBLIC void vAppEnhancedAddScene(uint8 u8Scene, uint16 u16GroupId);
+PUBLIC void vAppViewScene(uint8 u8SceneId, uint16 u16GroupId);
+PUBLIC void vAppEnhancedViewScene(uint8 u8SceneId, uint16 u16GroupId);
+PUBLIC void vAppCopyScene(uint8 u8Mode, uint8 u8FromSceneId, uint16 u16FromGroupId, uint8 u8ToSceneId, uint16 u16ToGroupId);
+PUBLIC void vAppStoreSceneById(uint8 u8SceneId, uint16 u16GroupId);
+#endif
+
 PUBLIC void vAppChangeChannel(void);
 PUBLIC void vAppIdentifyQuery(void);
 

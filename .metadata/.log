@@ -494,3 +494,45 @@ Binding(CTRL+SHIFT+H,
 
 !ENTRY org.eclipse.osgi 2 1 2021-03-19 21:43:25.053
 !MESSAGE NLS unused message: Oscfg1Group_desc in: messages
+
+!ENTRY org.eclipse.jface 2 0 2021-03-19 22:10:19.188
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-03-19 22:10:19.188
+!MESSAGE A conflict occurred for ALT+ARROW_LEFT:
+Binding(ALT+ARROW_LEFT,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.hover.backwardMacroExpansion,Back,
+		Step backward in macro expansions,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@17f2ed8,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.macroExpansionHoverScope,,,system)
+Binding(ALT+ARROW_LEFT,
+	ParameterizedCommand(Command(org.eclipse.ui.navigate.backwardHistory,Backward History,
+		Move backward in the editor navigation history,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@17e39a7,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-03-19 22:10:19.188
+!MESSAGE A conflict occurred for ALT+ARROW_RIGHT:
+Binding(ALT+ARROW_RIGHT,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.hover.forwardMacroExpansion,Forward,
+		Step forward in macro expansions,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@dc92c2,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.macroExpansionHoverScope,,,system)
+Binding(ALT+ARROW_RIGHT,
+	ParameterizedCommand(Command(org.eclipse.ui.navigate.forwardHistory,Forward History,
+		Move forward in the editor navigation history,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1fb1525,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.cdt.core 1 0 2021-03-19 22:19:39.969
+!MESSAGE Indexed 'JN-AN-1171-ZigBee-LightLink-Demo' (14 sources, 103 headers) in 1,16 sec: 12.988 declarations; 22.718 references; 0 unresolved inclusions; 0 syntax errors; 6 unresolved names (0,02%)
