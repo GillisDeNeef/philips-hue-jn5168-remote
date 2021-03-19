@@ -53,7 +53,6 @@
 
 #include "app_common.h"
 #include "app_timer_driver.h"
-#include "app_led_control.h"
 #include "zll_remote_node.h"
 
 #include "app_zcl_remote_task.h"

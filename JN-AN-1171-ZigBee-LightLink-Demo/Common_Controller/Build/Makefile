@@ -166,7 +166,6 @@ APPSRC += pdum_gen.c
 APPSRC += pdum_apdu.S
 APPSRC += zps_gen.c
 APPSRC += app_timer_driver.c
-APPSRC += app_led_control.c
 APPSRC += app_start_remote.c
 APPSRC += app_captouch_buttons.c
 APPSRC += DriverCapTouch.c

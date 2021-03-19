@@ -53,7 +53,6 @@
 #include "app_timer_driver.h"
 #include "zll_remote_node.h"
 #include "DriverCapTouch.h"
-#include "app_led_control.h"
 
 #include <string.h>
 
@@ -389,7 +388,6 @@ PRIVATE void vSetUpWakeUpConditions(void)
 {
     if ( bDeepSleep)
     {
-        APP_vSetLeds(0);                    /* ensure leds are off */
         u32AHI_DioWakeStatus();             /* clear interrupts */
         vAHI_DioSetDirection(POWER_BTN,0);  /* Set Power Button(DIO0) as Input  */
         vAHI_DioWakeEdge(0,POWER_BTN);      /* Set wake up as DIO Falling Edge  */

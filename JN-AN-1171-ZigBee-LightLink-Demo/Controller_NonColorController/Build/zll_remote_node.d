@@ -92,7 +92,6 @@ c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Controller_NonColo
  c:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/General/Include/groups.h \
  c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common/Source/PDM_IDs.h \
  c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/app_captouch_buttons.h \
- c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/app_led_control.h \
  c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/zll_remote_node.h \
  c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common/Source/eventStrings.h \
  c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/app_zcl_remote_task.h \
@@ -282,8 +281,6 @@ c:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/General/Include/groups
 c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common/Source/PDM_IDs.h:
 
 c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/app_captouch_buttons.h:
-
-c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/app_led_control.h:
 
 c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/zll_remote_node.h:
 

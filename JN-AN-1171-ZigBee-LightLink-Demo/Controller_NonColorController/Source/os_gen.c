@@ -6,7 +6,7 @@
  *
  * COMPONENT:      os_gen.c
  *
- * DATE:           Fri Mar 19 21:46:21 2021
+ * DATE:           Fri Mar 19 23:06:51 2021
  *
  * AUTHOR:         Jennic RTOS Configuration Tool
  *
@@ -142,7 +142,6 @@ PUBLIC bool os_bAPP_cbSetTickTimerCompare(uint32 );
 PUBLIC uint32 os_u32APP_cbGetTickTimer(void);
 PUBLIC void os_vAPP_cbEnableTickTimer(void);
 PUBLIC void os_vAPP_cbDisableTickTimer(void);
-PUBLIC void os_vApp_cbBlinkLed(void *);
 
 /* Module Exceptions */
 
@@ -296,7 +295,6 @@ tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_AddGroupTimer = { OS_SWTIMER_MAGIC, N
 tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_PollTimer = { OS_SWTIMER_MAGIC, NULL, &os_HWCounter_APP_cntrTickTimer, NULL, &os_Task_APP_SleepAndPollTask, 0, OS_E_SWTIMER_STOPPED, FALSE };
 tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_CommissionTimer = { OS_SWTIMER_MAGIC, NULL, &os_HWCounter_APP_cntrTickTimer, NULL, &os_Task_APP_CommissionTimerTask, 0, OS_E_SWTIMER_STOPPED, FALSE };
 tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_IdTimer = { OS_SWTIMER_MAGIC, NULL, &os_HWCounter_APP_cntrTickTimer, NULL, &os_Task_APP_ID_Task, 0, OS_E_SWTIMER_STOPPED, FALSE };
-tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_LedBlinkTimer = { OS_SWTIMER_MAGIC, NULL, &os_HWCounter_APP_cntrTickTimer, NULL, os_vApp_cbBlinkLed, 0, OS_E_SWTIMER_STOPPED, TRUE };
 
 /****************************************************************************/
 /***        Local Variables                                               ***/

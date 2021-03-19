@@ -60,7 +60,6 @@
 
 #include "app_timer_driver.h"
 #include "app_captouch_buttons.h"
-#include "app_led_control.h"
 #include "zll_remote_node.h"
 
 #include "eventStrings.h"
@@ -201,8 +200,6 @@ extern bool_t bDeepSleep;
 
 PRIVATE uint8 u8GroupId=0;
 PRIVATE bool bAddModeBroadcast=FALSE;
-
-teShiftLevel eShiftLevel = E_SHIFT_0;
 
 #if (defined DUT_CONTROLLER)
     PRIVATE bool_t bAddrMode = FALSE;
@@ -398,7 +395,6 @@ PUBLIC void APP_vInitialiseNode(void)
 {
     DBG_vPrintf(TRACE_APP, "\nAPP_vInitialiseNode*");
 
-    APP_vInitLeds();
     sZllState.eNodeState = E_REMOTE_STARTUP;
 
     uint16 u16BytesRead;
@@ -1232,344 +1228,67 @@ PRIVATE void APP_vHandleKeyPress(teUserKeyCodes eKeyCode)
 
     APP_CommissionEvent sEvent;
 
-    switch (eShiftLevel)
-    {
-        case E_SHIFT_0:
-           bSendFactoryResetOverAir=FALSE;
-            u8SelfFR = 0;
+    bSendFactoryResetOverAir=FALSE;
+	u8SelfFR = 0;
 
-            switch (eKeyCode)
-            {
-                case KEY_1: // Brightness Up
-                            vAppLevelMove(E_CLD_LEVELCONTROL_MOVE_MODE_UP, LEVEL_CHANGE_STEPS_PER_SEC_FAST, TRUE);
+	switch (eKeyCode)
+	{
+		case KEY_1: // Brightness Up
+			vAppLevelMove(E_CLD_LEVELCONTROL_MOVE_MODE_UP, LEVEL_CHANGE_STEPS_PER_SEC_FAST, TRUE);
+			break;
 
-                            break;
-                case KEY_2: // Move Hue Up
-                            #ifdef CLD_COLOUR_CONTROL
-#if STOP_COLOUR_LOOP
-                            vAPPColourLoopStop();
-#endif
-                            vAppEnhancedMoveHue(E_CLD_COLOURCONTROL_MOVE_MODE_UP, 4000);
-                            #endif
-                            break;
-                case KEY_3: // Move Saturation Up
-                            #ifdef CLD_COLOUR_CONTROL
-#if STOP_COLOUR_LOOP
-                                vAPPColourLoopStop();
-#endif
-                                vAppMoveSaturation(E_CLD_COLOURCONTROL_MOVE_MODE_UP, SAT_CHANGE_STEPS_PER_SEC);
-                            #endif
-                            break;
-                case KEY_4: // On
-                            vAppOnOff(E_CLD_ONOFF_CMD_ON);
-                            break;
-                case KEY_5: // Brightness Down
-                            vAppLevelMove(E_CLD_LEVELCONTROL_MOVE_MODE_DOWN, LEVEL_CHANGE_STEPS_PER_SEC_FAST, FALSE);
-                            break;
-                case KEY_6: // Move Hue Down
-                            #ifdef CLD_COLOUR_CONTROL
-#if STOP_COLOUR_LOOP
-                                vAPPColourLoopStop();
-#endif
-                                vAppEnhancedMoveHue(E_CLD_COLOURCONTROL_MOVE_MODE_DOWN, 4000);
-                            #endif
-                            break;
-                case KEY_7: // Move Saturation Down
-                            #ifdef CLD_COLOUR_CONTROL
-#if STOP_COLOUR_LOOP
-                                vAPPColourLoopStop();
-#endif
-                                vAppMoveSaturation(E_CLD_COLOURCONTROL_MOVE_MODE_DOWN, SAT_CHANGE_STEPS_PER_SEC);
-                            #endif
-                            break;
-                case KEY_8: // Off
-                            //vAppOnOff( E_CLD_ONOFF_CMD_OFF_EFFECT);
-                            vAppOnOff( E_CLD_ONOFF_CMD_OFF);
-                            break;
-                case KEY_9: // Recall Scene 1
-                            #ifdef CLD_SCENES
-                                bAddrMode=TRUE;
-                                vAppRecallSceneById(1,sGroupTable.asGroupRecords[0].u16GroupId);
-                            #endif
-                            break;
-                case KEY_10: // Recall Scene 2
-                             #ifdef CLD_SCENES
-                                 bAddrMode=TRUE;
-                                 vAppRecallSceneById(2,sGroupTable.asGroupRecords[0].u16GroupId);
-                             #endif
-                             break;
-                case KEY_11: // Recall Scene 3
-                            #ifdef CLD_SCENES
-                                bAddrMode=TRUE;
-                                vAppRecallSceneById(3,sGroupTable.asGroupRecords[0].u16GroupId);
-                            #endif
-                            break;
-                case KEY_12: // Recall Scene 4
-                             #ifdef CLD_SCENES
-                                 bAddrMode=TRUE;
-                                 vAppRecallSceneById(4,sGroupTable.asGroupRecords[0].u16GroupId);
-                            #endif
-                             break;
-                case KEY_13: // Shift
-                             eShiftLevel += 1;
-                             break;
-                case KEY_14: // Unicast/Groupcast Toggle
-                             bAddrMode = !bAddrMode;
-                             break;
-                case KEY_15: // Identify / Next Light
-                             bAddrMode=FALSE;
-                             vSelectLight();
-                             break;
-                case KEY_16: // TouchLink and Add to Default Group
-                             vAppSetGroupId(0);
-                             sEvent.eType = APP_E_COMMISION_START;
-                             u8RejoinAttemptsRemaining = 10;
-                             OS_ePostMessage(APP_CommissionEvents, &sEvent);
-                             break;
-                default : //Default
-                          break;
-            }
-            break;
+		case KEY_4: // On
+			vAppOnOff(E_CLD_ONOFF_CMD_ON);
+			break;
 
-        case E_SHIFT_1:
-            bSendFactoryResetOverAir=FALSE;
-            u8SelfFR =0;
-            switch (eKeyCode)
-            {
-                case KEY_1: // Brightness Up
-                            vAppLevelMove(E_CLD_LEVELCONTROL_MOVE_MODE_UP, LEVEL_CHANGE_STEPS_PER_SEC_MED, TRUE);
-                            break;
-                case KEY_2: // Move Color Temperature Up
-                            #ifdef CLD_COLOUR_CONTROL
-#if STOP_COLOUR_LOOP
-                                vAPPColourLoopStop();
-#endif
-                                vAppMoveColourTemperature(E_CLD_COLOURCONTROL_MOVE_MODE_UP,
-                                                          COL_TEMP_CHANGE_STEPS_PER_SEC,
-                                                          COL_TEMP_PHY_MIN,
-                                                          COL_TEMP_PHY_MAX);
-                            #endif
-                            break;
-                case KEY_3: // Set Color Loop
-                            #ifdef CLD_COLOUR_CONTROL
-                                vAppColorLoopSet(0x07,                                                            // flags
-                                                 E_CLD_COLOURCONTROL_COLOURLOOP_ACTION_ACTIVATE_FROM_CURRENT,    // action
-                                                 E_CLD_COLOURCONTROL_COLOURLOOP_DIRECTION_INCREMENT,            // direction
-                                                 20,                                                             // Finish a loop in 60 secs
-                                                 0x00);                                                            // start hue
-                            #endif
-                            break;
-                case KEY_4: // On
-                            vAppOnOff(E_CLD_ONOFF_CMD_ON);
-                            break;
-                case KEY_5: // Brightness Down
-                            vAppLevelMove(E_CLD_LEVELCONTROL_MOVE_MODE_DOWN, LEVEL_CHANGE_STEPS_PER_SEC_MED, FALSE);
-                            break;
-                case KEY_6: //Move Temperature Down
-                            #ifdef CLD_COLOUR_CONTROL
-#if STOP_COLOUR_LOOP
-                                vAPPColourLoopStop();
-#endif
-                                /* move the real colour temperature down */
-                                   vAppMoveColourTemperature(E_CLD_COLOURCONTROL_MOVE_MODE_DOWN,
-                                                             COL_TEMP_CHANGE_STEPS_PER_SEC,
-                                                             COL_TEMP_PHY_MIN,
-                                                             COL_TEMP_PHY_MAX);
+		case KEY_5: // Brightness Down
+			vAppLevelMove(E_CLD_LEVELCONTROL_MOVE_MODE_DOWN, LEVEL_CHANGE_STEPS_PER_SEC_FAST, FALSE);
+			break;
 
-                            #endif
-                            break;
-                case KEY_7: //Stop color Loop
-                            #ifdef CLD_COLOUR_CONTROL
-                                vAPPColourLoopStop();                                                    // stat hue
-                            #endif
-                            break;
-                case KEY_8: // Off
-                            vAppOnOff(E_CLD_ONOFF_CMD_OFF_EFFECT);
-                            break;
-                case KEY_9: // Scene Save 1
-                            #ifdef CLD_SCENES
-                                bAddrMode=TRUE;
-                                vAppStoreSceneById(1,sGroupTable.asGroupRecords[0].u16GroupId);
-                                eShiftLevel = 0;
-                            #endif
-                            break;
-                case KEY_10: // Scene Save 2
-                             #ifdef CLD_SCENES
-                                 bAddrMode=TRUE;
-                                 vAppStoreSceneById(2,sGroupTable.asGroupRecords[0].u16GroupId);
-                                 eShiftLevel = 0;
-                             #endif
-                             break;
-                case KEY_11: // Scene Save 3
-                             #ifdef CLD_SCENES
-                                bAddrMode=TRUE;
-                                vAppStoreSceneById(3,sGroupTable.asGroupRecords[0].u16GroupId);
-                                eShiftLevel = 0;
-                             #endif
-                             break;
-                case KEY_12: // Scene Save 4
-                             #ifdef CLD_SCENES
-                                 bAddrMode=TRUE;
-                                 vAppStoreSceneById(4,sGroupTable.asGroupRecords[0].u16GroupId);
-                                 eShiftLevel = 0;
-                             #endif
-                             break;
-                case KEY_13: // Shift
-                             eShiftLevel += 1;
-                             break;
-                case KEY_14: // Unicast/Groupcast Toggle
-                             bAddrMode = !bAddrMode;
-                             break;
-                case KEY_15: // Identify/Next Light
-                             bAddrMode=FALSE;
-                             vSelectLight();
-                             break;
-                case KEY_16: // TouchLink and Add to Default Group
-                             vAppSetGroupId(0);
-                             u8RejoinAttemptsRemaining = 10;
-                             sEvent.eType = APP_E_COMMISION_START;
-                             OS_ePostMessage(APP_CommissionEvents, &sEvent);
-                             break;
-                default : //Default
-                          break;
-            }
-            break;
+		case KEY_8: // Off
+			//vAppOnOff( E_CLD_ONOFF_CMD_OFF_EFFECT);
+			vAppOnOff( E_CLD_ONOFF_CMD_OFF);
+			break;
 
-        case E_SHIFT_2:
-            switch(eKeyCode)
-            {
-            case KEY_1: // Brightness Up
-                        vAppLevelMove(E_CLD_LEVELCONTROL_MOVE_MODE_UP, LEVEL_CHANGE_STEPS_PER_SEC_SLOW, TRUE);
-                        break;
-            case KEY_2:
-            #ifdef CLD_COLOUR_CONTROL
-#if STOP_COLOUR_LOOP
-                vAPPColourLoopStop();
-#endif
-                vAppGotoHueAndSat( 1);
-            #endif
-                break;
-            case KEY_4: // On
-                        vAppOnOff(E_CLD_ONOFF_CMD_ON);
-                        break;
-            case KEY_5: // Brightness Down
-                        vAppLevelMove(E_CLD_LEVELCONTROL_MOVE_MODE_DOWN, LEVEL_CHANGE_STEPS_PER_SEC_SLOW, FALSE);
-                        break;
-            case KEY_6:
-            #ifdef CLD_COLOUR_CONTROL
-#if STOP_COLOUR_LOOP
-                vAPPColourLoopStop();
-#endif
-                 vAppGotoHueAndSat( 0);
-            #endif
-                 break;
-            case KEY_8: // Off
-                        vAppOnOff(E_CLD_ONOFF_CMD_OFF_EFFECT);
-                        break;
-            case KEY_11:
-                        vSendPermitJoin();
-                        break;
-            case KEY_12: //Channel change from any channel other than 15 to 15 or from 15 to 11
-                         vAppChangeChannel();
-                         break;
-            case KEY_13: // Shift
-                         eShiftLevel += 1;
-                         break;
-            case KEY_14: // Unicast/Groupcast Toggle
-                         bAddrMode = !bAddrMode;
-                         break;
-            case KEY_15: // Identify/Next Light
-                         bAddrMode=FALSE;
-                         vSelectLight();
-                         break;
-            case KEY_16: // TouchLink and Add to Default Group
-                         vAppSetGroupId(0);
-                         u8RejoinAttemptsRemaining = 10;
-                         sEvent.eType = APP_E_COMMISION_START;
-                         OS_ePostMessage(APP_CommissionEvents, &sEvent);
-                         break;
-            default : //Default
-                      break;
-            }
-            break;
+		case KEY_10: // Reset Self to Factory New
+			if (u8SelfFR==0)u8SelfFR=1;
+			if(u8SelfFR==2)
+			{
+				u8SelfFR=0;
+				void *pvNwk = ZPS_pvAplZdoGetNwkHandle();
+				ZPS_tsNwkNib *psNib = ZPS_psNwkNibGetHandle( pvNwk);
+				u32OldFrameCtr = psNib->sTbl.u32OutFC + 10;
 
-        case E_SHIFT_3:
-            switch(eKeyCode)
-            {
-                case KEY_1:
-                            if(u8SelfFR==1)u8SelfFR=2;
-                            break;
-                case KEY_4: // On
-                            vAppOnOff(E_CLD_ONOFF_CMD_ON);
-                            break;
-                case KEY_5: // Reset Self to Factory New
-                            if (u8SelfFR==0)u8SelfFR=1;
-                            if(u8SelfFR==2)
-                            {
-                                u8SelfFR=0;
-                                void *pvNwk = ZPS_pvAplZdoGetNwkHandle();
-                                ZPS_tsNwkNib *psNib = ZPS_psNwkNibGetHandle( pvNwk);
-                                u32OldFrameCtr = psNib->sTbl.u32OutFC + 10;
+				if (ZPS_E_SUCCESS !=  ZPS_eAplZdoLeaveNetwork(0, FALSE,FALSE)) {
+					/* Leave failed, probably lost parent, so just reset everything */
 
-                                if (ZPS_E_SUCCESS !=  ZPS_eAplZdoLeaveNetwork(0, FALSE,FALSE)) {
-                                    /* Leave failed, probably lost parent, so just reset everything */
+					vFactoryResetRecords();
+					/* force a restart */
+					vAHI_SwReset();
+				}
+			}
+			break;
 
-                                    vFactoryResetRecords();
-                                    /* force a restart */
-                                    vAHI_SwReset();
-                                }
+		case KEY_11:
+			vSendPermitJoin();
+			break;
 
+		case KEY_15: // Factory Reset TouchLink Target
+			 sEvent.eType = APP_E_COMMISION_START;
+			 bSendFactoryResetOverAir = TRUE;
+			 OS_ePostMessage(APP_CommissionEvents, &sEvent);
+			 break;
 
-                            }
-                            break;
-                case KEY_8: // Off
-                            vAppOnOff(E_CLD_ONOFF_CMD_OFF_EFFECT);
-                            break;
-                case KEY_9:
-                    vAppIdentifyEffect(E_CLD_IDENTIFY_EFFECT_BLINK);
-                    break;
-                case KEY_10:
-                     vAppIdentifyEffect(E_CLD_IDENTIFY_EFFECT_BREATHE);
-                     break;
-                case KEY_11:
-                     vAppIdentifyEffect(E_CLD_IDENTIFY_EFFECT_OKAY);
-                     break;
-                case KEY_12:
-                     vAppIdentifyEffect(E_CLD_IDENTIFY_EFFECT_CHANNEL_CHANGE);
-                     break;
-                case KEY_13: // Shift
-                             eShiftLevel = E_SHIFT_0;
-                             break;
-                case KEY_14: // Unicast/Groupcast Toggle
-                             bAddrMode = !bAddrMode;
-                             break;
-                case KEY_15: // Identify/Next Light
-                             bAddrMode=FALSE;
-                             vSelectLight();
-                             break;
-                case KEY_16: // Factory Reset TouchLink Target
-                             sEvent.eType = APP_E_COMMISION_START;
-                             bSendFactoryResetOverAir = TRUE;
-                             OS_ePostMessage(APP_CommissionEvents, &sEvent);
-                             break;
-                default : //Default
-                          u8SelfFR =0;
-                          bSendFactoryResetOverAir=FALSE;
-                          break;
-            }
-            break;
+		case KEY_16: // TouchLink and Add to Default Group
+			 vAppSetGroupId(0);
+			 sEvent.eType = APP_E_COMMISION_START;
+			 u8RejoinAttemptsRemaining = 10;
+			 OS_ePostMessage(APP_CommissionEvents, &sEvent);
+			 break;
 
-        default:
-                 u8SelfFR =0;
-                 break;
-    }
-
-    /* Update LED's to reflect shift level */
-     APP_vSetLeds(eShiftLevel);
-     APP_vBlinkLeds(eShiftLevel);
-
-
-
+		default : //Default
+			break;
+	}
 }
 
 
@@ -1587,64 +1306,18 @@ PRIVATE void APP_vHandleKeyPress(teUserKeyCodes eKeyCode)
  ****************************************************************************/
 PRIVATE void APP_vHandleKeyRelease(teUserKeyCodes eKeyCode)
 {
-    switch(eShiftLevel)
-    {
-        case E_SHIFT_0:
-            switch(eKeyCode)
-            {
-                case KEY_1: vAppLevelStop();
-                            break;
-                case KEY_2: // Stop Move Hue
-                            #ifdef CLD_COLOUR_CONTROL
-                                vAppEnhancedMoveHue(E_CLD_COLOURCONTROL_MOVE_MODE_STOP, 0);
-                            #endif
-                            break;
-                case KEY_3: // Stop Move Saturation
-                            #ifdef CLD_COLOUR_CONTROL
-                                vAppMoveSaturation(E_CLD_COLOURCONTROL_MOVE_MODE_STOP, 0);
-                            #endif
-                            break;
-                case KEY_5: vAppLevelStop();
-                            break;
-                case KEY_6: // Stop Move Hue
-                            #ifdef CLD_COLOUR_CONTROL
-                                vAppEnhancedMoveHue(E_CLD_COLOURCONTROL_MOVE_MODE_STOP, 0);
-                            #endif
-                            break;
-                case KEY_7: // Stop Move Saturation
-                            #ifdef CLD_COLOUR_CONTROL
-                                vAppMoveSaturation(E_CLD_COLOURCONTROL_MOVE_MODE_STOP, 0);
-                            #endif
-                            break;
+	switch(eKeyCode)
+	{
+		case KEY_1:
+			vAppLevelStop();
+			break;
+		case KEY_5:
+			vAppLevelStop();
+			break;
 
-                default:
-                    break;
-            }
-            break;
-        case E_SHIFT_1:
-            switch(eKeyCode)
-            {
-                case KEY_1: vAppLevelStop();
-                            break;
-                case KEY_2: // Stop Step Color Temperature
-                            #ifdef CLD_COLOUR_CONTROL
-                                vAppMoveColourTemperature(E_CLD_COLOURCONTROL_MOVE_MODE_STOP, 0, COL_TEMP_PHY_MIN,COL_TEMP_PHY_MAX);
-                            #endif
-                            break;
-                case KEY_5: vAppLevelStop();
-                            break;
-                case KEY_6: // Stop Step Color Temperature
-                            #ifdef CLD_COLOUR_CONTROL
-                                vAppMoveColourTemperature(E_CLD_COLOURCONTROL_MOVE_MODE_STOP, 0, COL_TEMP_PHY_MIN,COL_TEMP_PHY_MAX);
-                            #endif
-                            break;
-                default:
-                         break;
-            }
-            break;
-        case E_SHIFT_2: break;
-        case E_SHIFT_3: break;
-    }
+		default : //Default
+			break;
+	}
 }
 
 
@@ -2176,7 +1849,6 @@ PUBLIC void vAppChangeChannel( void)
  ****************************************************************************/
 PUBLIC void vStopAllTimers(void)
 {
-    OS_eStopSWTimer(APP_LedBlinkTimer);
     OS_eStopSWTimer(APP_PollTimer);
     OS_eStopSWTimer(APP_AddGroupTimer);
     OS_eStopSWTimer(APP_IdTimer);
@@ -2877,7 +2549,7 @@ PUBLIC void vHandleIdentifyRequest(uint16 u16Duration)
     OS_eStopSWTimer(APP_IdTimer);
     if (u16IdTime == 0)
     {
-        APP_vSetLeds(eShiftLevel);
+        //APP_vSetLeds(eShiftLevel);
     }
     else
     {
@@ -2886,7 +2558,7 @@ PUBLIC void vHandleIdentifyRequest(uint16 u16Duration)
             u16Duration = 10;
         }
         OS_eStartSWTimer(APP_IdTimer, APP_TIME_MS(500), NULL);
-        APP_vSetLeds(E_SHIFT_3);
+        //APP_vSetLeds(E_SHIFT_3);
     }
 }
 
@@ -2907,16 +2579,16 @@ OS_TASK(APP_ID_Task)
     {
         /* interpan id time out, shut down */
         OS_eStopSWTimer(APP_IdTimer);
-        APP_vSetLeds(eShiftLevel);
+        //APP_vSetLeds(eShiftLevel);
     } else {
         u16IdTime--;
         if (u16IdTime & 0x01)
         {
-            APP_vSetLeds(E_SHIFT_0);
+            //APP_vSetLeds(E_SHIFT_0);
         }
         else
         {
-            APP_vSetLeds(E_SHIFT_3);
+            //APP_vSetLeds(E_SHIFT_3);
         }
         OS_eContinueSWTimer(APP_IdTimer, APP_TIME_MS(500), NULL);
     }

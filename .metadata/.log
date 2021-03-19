@@ -536,3 +536,15 @@ Binding(ALT+ARROW_RIGHT,
 
 !ENTRY org.eclipse.cdt.core 1 0 2021-03-19 22:19:39.969
 !MESSAGE Indexed 'JN-AN-1171-ZigBee-LightLink-Demo' (14 sources, 103 headers) in 1,16 sec: 12.988 declarations; 22.718 references; 0 unresolved inclusions; 0 syntax errors; 6 unresolved names (0,02%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2021-03-19 22:37:48.334
+!MESSAGE Indexed 'JN-AN-1171-ZigBee-LightLink-Demo' (13 sources, 102 headers) in 1,24 sec: 12.955 declarations; 22.624 references; 3 unresolved inclusions; 0 syntax errors; 21 unresolved names (0,06%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2021-03-19 22:53:32.228
+!MESSAGE Indexed 'JN-AN-1171-ZigBee-LightLink-Demo' (13 sources, 102 headers) in 1,01 sec: 12.955 declarations; 22.469 references; 2 unresolved inclusions; 0 syntax errors; 11 unresolved names (0,03%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2021-03-19 22:57:10.247
+!MESSAGE Indexed 'JN-AN-1171-ZigBee-LightLink-Demo' (13 sources, 102 headers) in 1,00 sec: 12.955 declarations; 22.452 references; 2 unresolved inclusions; 0 syntax errors; 6 unresolved names (0,02%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2021-03-19 23:05:44.764
+!MESSAGE Indexed 'JN-AN-1171-ZigBee-LightLink-Demo' (13 sources, 102 headers) in 1,02 sec: 12.955 declarations; 22.452 references; 0 unresolved inclusions; 0 syntax errors; 6 unresolved names (0,02%)

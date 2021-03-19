@@ -6,7 +6,7 @@
  *
  * COMPONENT:      os_gen.h
  *
- * DATE:           Fri Mar 19 21:46:21 2021
+ * DATE:           Fri Mar 19 23:06:51 2021
  *
  * AUTHOR:         Jennic RTOS Configuration Tool
  *
@@ -91,7 +91,6 @@
 #define APP_PollTimer ((OS_thSWTimer)&os_SWTimer_APP_cntrTickTimer_APP_PollTimer)
 #define APP_CommissionTimer ((OS_thSWTimer)&os_SWTimer_APP_cntrTickTimer_APP_CommissionTimer)
 #define APP_IdTimer ((OS_thSWTimer)&os_SWTimer_APP_cntrTickTimer_APP_IdTimer)
-#define APP_LedBlinkTimer ((OS_thSWTimer)&os_SWTimer_APP_cntrTickTimer_APP_LedBlinkTimer)
 
 /* Module Exceptions */
 
@@ -139,7 +138,6 @@ extern struct _os_tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_AddGroupTimer;
 extern struct _os_tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_PollTimer;
 extern struct _os_tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_CommissionTimer;
 extern struct _os_tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_IdTimer;
-extern struct _os_tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_LedBlinkTimer;
 
 /****************************************************************************/
 /***        Exported Functions                                            ***/
@@ -152,6 +150,5 @@ PUBLIC bool os_bAPP_cbSetTickTimerCompare(uint32 );
 PUBLIC uint32 os_u32APP_cbGetTickTimer(void);
 PUBLIC void os_vAPP_cbEnableTickTimer(void);
 PUBLIC void os_vAPP_cbDisableTickTimer(void);
-PUBLIC void os_vApp_cbBlinkLed(void *);
 
 #endif
