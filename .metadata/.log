@@ -1,0 +1,67 @@
+!SESSION 2021-03-19 19:30:21.730 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.7.0_51
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=nl_BE
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.cdt.core 1 0 2021-03-19 19:30:59.368
+!MESSAGE Indexed 'JN-AN-1171-ZigBee-LightLink-Demo' (51 sources, 93 headers) in 1,50 sec: 4.945 declarations; 17.257 references; 410 unresolved inclusions; 2 syntax errors; 4.614 unresolved names (17,21%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2021-03-19 19:31:32.879
+!MESSAGE Indexed 'JN-AN-1171-ZigBee-LightLink-Demo' (51 sources, 93 headers) in 0,81 sec: 4.945 declarations; 17.257 references; 410 unresolved inclusions; 2 syntax errors; 4.614 unresolved names (17,21%)
+
+!ENTRY com.nxp.jennic.eclipse.jmp.launch 4 0 2021-03-19 19:38:49.966
+!MESSAGE Error opening firmware image on COM3
+!STACK 0
+java.io.IOException: Failed to open file "" (Het systeem kan het opgegeven pad niet vinden.)
+	at com.nxp.jennic.programmer.FlashProgrammerJNI.FwOpen(Native Method)
+	at com.nxp.jennic.programmer.FlashProgrammer.FwOpen(FlashProgrammer.java:40)
+	at com.nxp.jennic.programmer.Programmer.openFirmware(Programmer.java:67)
+	at com.nxp.jennic.eclipse.jmp.launch.ProgramJob.task(ProgramJob.java:82)
+	at com.nxp.jennic.eclipse.jmp.launch.ProgrammerJob.run(ProgrammerJob.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY com.nxp.jennic.eclipse.jmp.launch 4 0 2021-03-19 19:38:59.834
+!MESSAGE Error opening firmware image on COM3
+!STACK 0
+java.io.IOException: Failed to open file "" (Het systeem kan het opgegeven pad niet vinden.)
+	at com.nxp.jennic.programmer.FlashProgrammerJNI.FwOpen(Native Method)
+	at com.nxp.jennic.programmer.FlashProgrammer.FwOpen(FlashProgrammer.java:40)
+	at com.nxp.jennic.programmer.Programmer.openFirmware(Programmer.java:67)
+	at com.nxp.jennic.eclipse.jmp.launch.ProgramJob.task(ProgramJob.java:82)
+	at com.nxp.jennic.eclipse.jmp.launch.ProgrammerJob.run(ProgrammerJob.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY com.nxp.jennic.eclipse.jmp.launch 4 0 2021-03-19 19:39:36.573
+!MESSAGE Error opening firmware image on COM3
+!STACK 0
+java.io.IOException: Failed to open file "" (Het systeem kan het opgegeven pad niet vinden.)
+	at com.nxp.jennic.programmer.FlashProgrammerJNI.FwOpen(Native Method)
+	at com.nxp.jennic.programmer.FlashProgrammer.FwOpen(FlashProgrammer.java:40)
+	at com.nxp.jennic.programmer.Programmer.openFirmware(Programmer.java:67)
+	at com.nxp.jennic.eclipse.jmp.launch.ProgramJob.task(ProgramJob.java:82)
+	at com.nxp.jennic.eclipse.jmp.launch.ProgrammerJob.run(ProgrammerJob.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY com.nxp.jennic.eclipse.jmp.launch 4 0 2021-03-19 19:40:07.612
+!MESSAGE Error programming flash on COM3
+!STACK 0
+java.io.IOException: Communication failure writing flash at address 0x00019580
+	at com.nxp.jennic.programmer.FlashProgrammerJNI.FlashProgram(Native Method)
+	at com.nxp.jennic.programmer.FlashProgrammer.FlashProgram(FlashProgrammer.java:68)
+	at com.nxp.jennic.programmer.Programmer.programFlash(Programmer.java:79)
+	at com.nxp.jennic.eclipse.jmp.launch.ProgramJob.task(ProgramJob.java:90)
+	at com.nxp.jennic.eclipse.jmp.launch.ProgrammerJob.run(ProgrammerJob.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY com.nxp.jennic.eclipse.jmp.launch 4 0 2021-03-19 19:43:01.415
+!MESSAGE Error opening firmware image on COM3
+!STACK 0
+java.io.IOException: Success 
+	at com.nxp.jennic.programmer.FlashProgrammerJNI.FwOpen(Native Method)
+	at com.nxp.jennic.programmer.FlashProgrammer.FwOpen(FlashProgrammer.java:40)
+	at com.nxp.jennic.programmer.Programmer.openFirmware(Programmer.java:67)
+	at com.nxp.jennic.eclipse.jmp.launch.ProgramJob.task(ProgramJob.java:82)
+	at com.nxp.jennic.eclipse.jmp.launch.ProgrammerJob.run(ProgrammerJob.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
