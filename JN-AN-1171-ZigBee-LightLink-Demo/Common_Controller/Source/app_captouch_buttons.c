@@ -46,7 +46,6 @@
 #include "pwrm.h"
 #include "app_captouch_buttons.h"
 #include "DriverCapTouch.h"
-#include "low_bat_indicator.h"
 
 /****************************************************************************/
 /***        Macro Definitions                                             ***/
@@ -162,13 +161,6 @@ OS_ISR(APP_isrSystemController)
 			 * Call the call back */
 			PWRM_vWakeInterruptCallback();
 		}
-
-        /* check if we had a enter brown-out interrupt below VTrip*/
-
-        if (u32AHI_BrownOutPoll() & E_AHI_SYSCTRL_VREM_MASK)
-        {
-        	vCbSystemController(E_AHI_DEVICE_SYSCTRL,E_AHI_SYSCTRL_VREM_MASK);
-        }
 }
 
 

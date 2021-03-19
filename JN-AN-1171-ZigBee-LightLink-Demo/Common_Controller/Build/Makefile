@@ -175,7 +175,6 @@ APPSRC += zll_remote_node.c
 APPSRC += ecb_decrypt.c
 APPSRC += app_zcl_remote_task.c
 APPSRC += app_remote_commission_task.c
-APPSRC += low_bat_indicator.c
 APPSRC += appZpsBeaconHandler.c
 
 ifeq ($(DUT_CONTROLLER), 1)

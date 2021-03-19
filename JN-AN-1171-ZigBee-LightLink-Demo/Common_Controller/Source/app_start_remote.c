@@ -53,7 +53,6 @@
 #include "app_timer_driver.h"
 #include "zll_remote_node.h"
 #include "DriverCapTouch.h"
-#include "low_bat_indicator.h"
 #include "app_led_control.h"
 
 #include <string.h>
@@ -204,9 +203,6 @@ PWRM_CALLBACK(Wakeup)
     /*Clear wakeup status by reading the wake status*/
     u32AHI_DioWakeStatus();
 
-    /* Reinitialise the battery monitor as sleep restores default 0f 2.0v */
-    vLowBatIndicationInit( (LHS_LED_DIO | RHS_LED_DIO), E_BO_TRIP_2V4 );
-
     /*Wake up the touch interface */
     eTouchWake();
 
@@ -264,11 +260,6 @@ PUBLIC void vAppMain(void)
          * */
         vAHI_OptimiseWaitStates();
     #endif
-
-     /* Enable the Low Battery Detection function */
-
-     vLowBatIndicationInit( (LHS_LED_DIO | RHS_LED_DIO), E_BO_TRIP_2V4 );
-
 
     /* Don't use RTS/CTS pins on UART0 as they are used for buttons */
 
