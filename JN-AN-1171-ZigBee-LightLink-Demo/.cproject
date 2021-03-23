@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?fileVersion 4.0.0?><cproject>
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
-		<cconfiguration id="0.876190861.2112005733.993807050.1593157031.81810401.2121998481">
-			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="0.876190861.2112005733.993807050.1593157031.81810401.2121998481" moduleId="org.eclipse.cdt.core.settings" name="Controller_NonColorController">
+		<cconfiguration id="0.876190861.2112005733.993807050.1593157031.81810401.2121998481.2034719378">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="0.876190861.2112005733.993807050.1593157031.81810401.2121998481.2034719378" moduleId="org.eclipse.cdt.core.settings" name="Controller_NonColorSceneController">
 				<externalSettings/>
 				<extensions>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
@@ -14,33 +14,33 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="JN-AN-1133-ZigBee-Pro-Lightswitch" buildProperties="" description="" id="0.876190861.2112005733.993807050.1593157031.81810401.2121998481" name="Controller_NonColorController" parent="org.eclipse.cdt.build.core.prefbase.cfg">
-					<folderInfo id="0.876190861.2112005733.993807050.1593157031.81810401.2121998481." name="/" resourcePath="">
-						<toolChain id="com.beyondsemi.toolchain.gnu.ba.elf.base.1231685196" name="BA ELF GNU toolchain" superClass="com.beyondsemi.toolchain.gnu.ba.elf.base">
-							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF" id="com.beyondsemi.target.gnu.platform.ba.elf.1211829824" superClass="com.beyondsemi.target.gnu.platform.ba.elf"/>
-							<builder arguments="REMOTE=Controller_NonColorController" buildPath="${ProjDirPath}/Common_Controller/Build/ " command="make" id="com.beyondsemi.builder.cdt.gnu.1120273408" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="com.beyondsemi.builder.cdt.gnu"/>
-							<tool id="com.beyondsemi.tool.gnu.ba.elf.compiler.c.base.35671983" name="BA ELF GNU C compiler" superClass="com.beyondsemi.tool.gnu.ba.elf.compiler.c.base">
-								<option id="gnu.c.compiler.option.include.paths.704649123" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+				<configuration artifactName="JN-AN-1133-ZigBee-Pro-Lightswitch" buildProperties="" description="" id="0.876190861.2112005733.993807050.1593157031.81810401.2121998481.2034719378" name="Controller_NonColorSceneController" parent="org.eclipse.cdt.build.core.prefbase.cfg">
+					<folderInfo id="0.876190861.2112005733.993807050.1593157031.81810401.2121998481.2034719378." name="/" resourcePath="">
+						<toolChain id="com.beyondsemi.toolchain.gnu.ba.elf.base.1574733434" name="BA ELF GNU toolchain" superClass="com.beyondsemi.toolchain.gnu.ba.elf.base">
+							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF" id="com.beyondsemi.target.gnu.platform.ba.elf.1348610788" superClass="com.beyondsemi.target.gnu.platform.ba.elf"/>
+							<builder arguments="REMOTE=Controller_NonColorSceneController" buildPath="${ProjDirPath}/Common_Controller/Build/ " command="make" id="com.beyondsemi.builder.cdt.gnu.1270910422" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="com.beyondsemi.builder.cdt.gnu"/>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.compiler.c.base.1180790025" name="BA ELF GNU C compiler" superClass="com.beyondsemi.tool.gnu.ba.elf.compiler.c.base">
+								<option id="gnu.c.compiler.option.include.paths.41543355" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;C:\NXP\bstudio_nxp\sdk\JN-SW-4168\Components\Common\Include&quot;"/>
 								</option>
-								<inputType id="com.beyondsemi.base.ba.elf.c.compiler.input.2128446903" superClass="com.beyondsemi.base.ba.elf.c.compiler.input"/>
-								<inputType id="com.beyondsemi.assembler.macro.input.341795024" superClass="com.beyondsemi.assembler.macro.input"/>
+								<inputType id="com.beyondsemi.base.ba.elf.c.compiler.input.90923042" superClass="com.beyondsemi.base.ba.elf.c.compiler.input"/>
+								<inputType id="com.beyondsemi.assembler.macro.input.1845151540" superClass="com.beyondsemi.assembler.macro.input"/>
 							</tool>
-							<tool id="com.beyondsemi.tool.gnu.ba.elf.compiler.cpp.base.135180972" name="BA ELF GNU C++ compiler" superClass="com.beyondsemi.tool.gnu.ba.elf.compiler.cpp.base"/>
-							<tool id="com.beyondsemi.tool.gnu.ba.elf.linker.c.base.1695995830" name="BA ELF GNU C linker" superClass="com.beyondsemi.tool.gnu.ba.elf.linker.c.base">
-								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.1867517008" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.compiler.cpp.base.1183322928" name="BA ELF GNU C++ compiler" superClass="com.beyondsemi.tool.gnu.ba.elf.compiler.cpp.base"/>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.linker.c.base.1832883091" name="BA ELF GNU C linker" superClass="com.beyondsemi.tool.gnu.ba.elf.linker.c.base">
+								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.282458493" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
 								</inputType>
 							</tool>
-							<tool id="com.beyondsemi.tool.gnu.ba.elf.linker.cpp.base.1891886623" name="BA ELF GNU C++ linker" superClass="com.beyondsemi.tool.gnu.ba.elf.linker.cpp.base"/>
-							<tool id="com.beyondsemi.tool.gnu.ba.elf.assembler.base.1450157653" name="BA ELF GNU assembler" superClass="com.beyondsemi.tool.gnu.ba.elf.assembler.base">
-								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1199924833" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
-								<inputType id="com.beyondsemi.assembler.input.1366676309" superClass="com.beyondsemi.assembler.input"/>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.linker.cpp.base.1581665055" name="BA ELF GNU C++ linker" superClass="com.beyondsemi.tool.gnu.ba.elf.linker.cpp.base"/>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.assembler.base.651998673" name="BA ELF GNU assembler" superClass="com.beyondsemi.tool.gnu.ba.elf.assembler.base">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1561996742" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="com.beyondsemi.assembler.input.1166261251" superClass="com.beyondsemi.assembler.input"/>
 							</tool>
-							<tool id="com.beyondsemi.tool.gnu.ba.elf.archiver.base.1295585020" name="BA ELF GNU archiver" superClass="com.beyondsemi.tool.gnu.ba.elf.archiver.base"/>
-							<tool id="com.beyondsemi.tool.gnu.ba.elf.size.base.398405058" name="BA ELF GNU size" superClass="com.beyondsemi.tool.gnu.ba.elf.size.base"/>
-							<tool id="com.beyondsemi.tool.gnu.ba.elf.objcopy.base.233619321" name="BA ELF GNU objcopy" superClass="com.beyondsemi.tool.gnu.ba.elf.objcopy.base"/>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.archiver.base.1481815312" name="BA ELF GNU archiver" superClass="com.beyondsemi.tool.gnu.ba.elf.archiver.base"/>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.size.base.939917046" name="BA ELF GNU size" superClass="com.beyondsemi.tool.gnu.ba.elf.size.base"/>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.objcopy.base.262741766" name="BA ELF GNU objcopy" superClass="com.beyondsemi.tool.gnu.ba.elf.objcopy.base"/>
 						</toolChain>
 					</folderInfo>
 				</configuration>
@@ -78,11 +78,11 @@
 		<configuration configurationName="Controller_ColourSceneControllerForShows">
 			<resource resourceType="PROJECT" workspacePath="/ZSL-Test-App"/>
 		</configuration>
-		<configuration configurationName="Controller_ColorSceneController">
-			<resource resourceType="PROJECT" workspacePath="/ZSL-Test-App"/>
-		</configuration>
 		<configuration configurationName="Light_ColorTemperatureLight_2">
 			<resource resourceType="PROJECT" workspacePath="/ZBProv1.1"/>
+		</configuration>
+		<configuration configurationName="Controller_ColorSceneController">
+			<resource resourceType="PROJECT" workspacePath="/ZSL-Test-App"/>
 		</configuration>
 		<configuration configurationName="Controller_ColorController">
 			<resource resourceType="PROJECT" workspacePath="/ZSL-Test-App"/>
@@ -122,10 +122,10 @@
 		<configuration configurationName="Controller_NonColorController">
 			<resource resourceType="PROJECT" workspacePath="/ZSL-Test-App"/>
 		</configuration>
-		<configuration configurationName="Light_DimmableLight_SSL2108A">
+		<configuration configurationName="Controller_NonColorSceneController">
 			<resource resourceType="PROJECT" workspacePath="/ZSL-Test-App"/>
 		</configuration>
-		<configuration configurationName="Controller_NonColorSceneController">
+		<configuration configurationName="Light_DimmableLight_SSL2108A">
 			<resource resourceType="PROJECT" workspacePath="/ZSL-Test-App"/>
 		</configuration>
 	</storageModule>
