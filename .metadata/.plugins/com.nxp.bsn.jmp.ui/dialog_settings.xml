@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="COM3" key="jmp.prog.port"/>
+	<item value="ERASE_PDM" key="jmp.prog.eeprom.mode"/>
+	<item value="1000000" key="jmp.prog.baud"/>
+	<list key="jmp.prog.eeprom.filelist">
+		<item value=""/>
+	</list>
+	<list key="jmp.prog.image.filelist">
+		<item value="${workspace_loc:/JN-AN-1171-ZigBee-LightLink-Demo/Controller_NonColorController/Build/Controller_NonColorController_JN5168.bin}"/>
+		<item value=""/>
+	</list>
+</section>

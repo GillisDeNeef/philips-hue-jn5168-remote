@@ -16,12 +16,12 @@
       <Modules xmi:type="oscfg:Module" xmi:id="_UoRIIDpMEd6X1p7n01EMHA" name="JN_AN_1171_ZigBee_LightLink_Demo">
         <ISRs xmi:type="oscfg:ISR" xmi:id="_8lTFEDpQEd6X1p7n01EMHA" name="APP_isrTickTimer" IPL="15" type="controlled" ISRSource="_BvTr0DpREd6X1p7n01EMHA"/>
         <ISRs xmi:type="oscfg:ISR" xmi:id="_wJybkFtKEd6qH6QyWDvQeQ" name="APP_isrSystemController" IPL="1" type="controlled" ISRSource="_vVU4wFtKEd6qH6QyWDvQeQ"/>
-        <ISRs xmi:type="oscfg:ISR" xmi:id="_js2IQMLAEeK5FryC3J14RA" name="APP_isrKeyScan" PostMessage="_5GqlEFtMEd6qH6QyWDvQeQ" IPL="14" type="controlled" ISRSource="_aySoEMLAEeK5FryC3J14RA"/>
         <Messages xmi:type="oscfg:Message" xmi:id="_JBf7EDrVEd6X1p7n01EMHA" name="APP_msgZpsEvents" ctype="ZPS_tsAfEvent" queue="1" Notifies="_x9JOoDrUEd6X1p7n01EMHA"/>
         <Messages xmi:type="oscfg:Message" xmi:id="_5GqlEFtMEd6qH6QyWDvQeQ" name="APP_msgEvents" ctype="APP_tsEvent" queue="8" Notifies="_x9JOoDrUEd6X1p7n01EMHA"/>
         <Messages xmi:type="oscfg:Message" xmi:id="_n30ocLJJEd6awJvEGNtQBw" name="APP_msgZpsEvents_ZCL" ctype="ZPS_tsAfEvent" queue="1" Notifies="_5Q3-8LJJEd6awJvEGNtQBw"/>
         <Messages xmi:type="oscfg:Message" xmi:id="_Ihlr0L50EeCjwq28IvASXg" name="APP_CommissionEvents" ctype="APP_CommissionEvent" queue="3" Notifies="_42x7wO1tEd-HdYIYyMhdvQ"/>
         <HWCounters xmi:type="oscfg:HWCounter" xmi:id="_lHpu4DpQEd6X1p7n01EMHA" name="APP_cntrTickTimer" disable_callback="_gJsHIDuwEd6x482rWS0aIQ" enable_callback="_Y9qlUTuwEd6x482rWS0aIQ" get_callback="_1gV7oDuwEd6x482rWS0aIQ" set_callback="_y13SYDuwEd6x482rWS0aIQ">
+          <SWTimers xmi:type="oscfg:SWTimer" xmi:id="_cSe58FtKEd6qH6QyWDvQeQ" name="APP_ButtonsScanTimer" Activates="_3fW68FtKEd6qH6QyWDvQeQ"/>
           <SWTimers xmi:type="oscfg:SWTimer" xmi:id="_U0kW4FtKEd6qH6QyWDvQeQ" name="APP_AddGroupTimer" Activates="_E-WwcMWAEd-FapThG4USjA"/>
           <SWTimers xmi:type="oscfg:SWTimer" xmi:id="_DVyz0d3BEd-2LJkMldyVmw" name="APP_PollTimer" Activates="_dayAYMcIEeCkdbAZlBX74g"/>
           <SWTimers xmi:type="oscfg:SWTimer" xmi:id="_w2DmkO1tEd-HdYIYyMhdvQ" name="APP_CommissionTimer" Activates="_8cJAIL53EeCjwq28IvASXg"/>
@@ -35,6 +35,7 @@
         <InterruptSources xmi:type="oscfg:InterruptSource" xmi:id="_vVU4wFtKEd6qH6QyWDvQeQ" source="SystemController" SourceISR="_wJybkFtKEd6qH6QyWDvQeQ"/>
         <InterruptSources xmi:type="oscfg:InterruptSource" xmi:id="_aySoEMLAEeK5FryC3J14RA" source="Timer1" SourceISR="_js2IQMLAEeK5FryC3J14RA"/>
         <CooperativeTaskGroups xmi:type="oscfg:CooperativeGroup" xmi:id="_mrc1kKv5EeGIcdc5w5WArg">
+          <CooperativeTasks xmi:type="oscfg:Task" xmi:id="_3fW68FtKEd6qH6QyWDvQeQ" name="APP_ButtonsScanTask" PostMessage="_5GqlEFtMEd6qH6QyWDvQeQ" autostarted="false" priority="300"/>
           <CooperativeTasks xmi:type="oscfg:Task" xmi:id="_bRNG0FiqEeGdTIYmBpP4Ew" name="APP_ID_Task" autostarted="false" priority="215"/>
           <CooperativeTasks xmi:type="oscfg:Task" xmi:id="_42x7wO1tEd-HdYIYyMhdvQ" name="APP_Commission_Task" PostMessage="_5GqlEFtMEd6qH6QyWDvQeQ" CollectMessage="_Ihlr0L50EeCjwq28IvASXg" EnterExitMutex="_98PuEDpJEd6X1p7n01EMHA _DhAXIDpKEd6X1p7n01EMHA _F6f-EDpKEd6X1p7n01EMHA" autostarted="false" priority="190"/>
           <CooperativeTasks xmi:type="oscfg:Task" xmi:id="_E-WwcMWAEd-FapThG4USjA" name="APP_AddGroupTask" PostMessage="_5GqlEFtMEd6qH6QyWDvQeQ" EnterExitMutex="_F6f-EDpKEd6X1p7n01EMHA _98PuEDpJEd6X1p7n01EMHA" autostarted="false" priority="220"/>
@@ -139,6 +140,11 @@
                 <children xmi:type="notation:Node" xmi:id="_VS5VUFiqEeGdTIYmBpP4Ew" visible="true" type="3006" element="_VRfnIViqEeGdTIYmBpP4Ew">
                   <children xmi:type="notation:Node" xmi:id="_VS7KgFiqEeGdTIYmBpP4Ew" visible="true" type="5005"/>
                   <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VS5VUliqEeGdTIYmBpP4Ew" x="29" y="161" width="253" height="-1"/>
+                </children>
+                <children xmi:type="notation:Node" xmi:id="_HLVlwIp8EeurqtTKHBjqFw" visible="true" type="3006" element="_cSe58FtKEd6qH6QyWDvQeQ">
+                  <children xmi:type="notation:DecorationNode" xmi:id="_HLWM0Ip8EeurqtTKHBjqFw" visible="true" type="5005"/>
+                  <styles xmi:type="notation:DescriptionStyle" xmi:id="_HLVlwYp8EeurqtTKHBjqFw" description=""/>
+                  <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HLVlwop8EeurqtTKHBjqFw" x="40" y="120" width="-1" height="-1"/>
                 </children>
                 <styles xmi:type="notation:TitleStyle" xmi:id="_lHpu5jpQEd6X1p7n01EMHA" showTitle="true"/>
                 <styles xmi:type="notation:SortingStyle" xmi:id="_lHpu5zpQEd6X1p7n01EMHA" sorting="None"/>

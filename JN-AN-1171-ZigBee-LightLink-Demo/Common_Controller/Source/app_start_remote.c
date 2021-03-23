@@ -52,7 +52,6 @@
 #include "appapi.h"
 #include "app_timer_driver.h"
 #include "zll_remote_node.h"
-#include "DriverCapTouch.h"
 
 #include <string.h>
 
@@ -87,7 +86,7 @@
 
 #define HALT_ON_EXCEPTION   FALSE
 
-#define POWER_BTN (1)
+#define WAKE_BTN (1 << 0)
 /****************************************************************************/
 /***        Type Definitions                                              ***/
 /****************************************************************************/
@@ -163,7 +162,7 @@ PWRM_CALLBACK(PreSleep)
     if(!bDeepSleep)
     {
         /* sleep memory held */
-        eTouchSleep();
+        //eTouchSleep();
        vAppApiSaveMacSettings();
     }
 
@@ -203,14 +202,14 @@ PWRM_CALLBACK(Wakeup)
     u32AHI_DioWakeStatus();
 
     /*Wake up the touch interface */
-    eTouchWake();
+    //eTouchWake();
 
     /* Don't use RTS/CTS pins on UART0 as they are used for buttons */
     vAHI_UartSetRTSCTS(E_AHI_UART_0, FALSE);
     DBG_vUartInit(DBG_E_UART_0, DBG_E_UART_BAUD_RATE_115200);
 
-    DBG_vPrintf(TRACE_SLEEP, "\n\nAPP: Woken up (CB)");
-    DBG_vPrintf(TRACE_APP, "\nAPP: Warm Waking powerStatus = 0x%x", u8AHI_PowerStatus());
+    DBG_vPrintf(TRACE_SLEEP, "\nAPP: Woken up (CB)\n");
+    DBG_vPrintf(TRACE_APP, "APP: Warm Waking powerStatus = 0x%x\n", u8AHI_PowerStatus());
 
     /* If the power status is OK and RAM held while sleeping
      * restore the MAC settings
@@ -219,7 +218,7 @@ PWRM_CALLBACK(Wakeup)
     {
         // Restore Mac settings (turns radio on)
         vMAC_RestoreSettings();
-        DBG_vPrintf(TRACE_APP, "\nAPP: MAC settings restored");
+        DBG_vPrintf(TRACE_APP, "APP: MAC settings restored\n");
     }
     DBG_vPrintf(TRACE_APP, "\nAPP: Restarting OS \n");
     /* Restart the OS */
@@ -268,7 +267,7 @@ PUBLIC void vAppMain(void)
     /* Do not use UART 1 if LEDs are used, as it shares DIO with the LEDS */
 
     DBG_vUartInit(DBG_E_UART_0, DBG_E_UART_BAUD_RATE_115200);
-    DBG_vPrintf(TRACE_START, "\n\nAPP: Switch Power Up");
+    DBG_vPrintf(TRACE_START, "\nAPP: Switch Power Up\n");
 
     /*
      * Delay to allow programmer to end and serial terminal to start on PC
@@ -285,7 +284,7 @@ PUBLIC void vAppMain(void)
     #endif
 
     #if JENNIC_CHIP_FAMILY == JN516x
-        DBG_vPrintf(TRACE_START, "\nHeap size at step 1 is %d bytes (start=%08x end=%08x)", u32HeapEnd - u32HeapStart, u32HeapStart, u32HeapEnd);
+        DBG_vPrintf(TRACE_START, "Heap size at step 1 is %d bytes (start=%08x end=%08x)\n", u32HeapEnd - u32HeapStart, u32HeapStart, u32HeapEnd);
     #endif
 
     /*
@@ -300,7 +299,7 @@ PUBLIC void vAppMain(void)
      * */
     if (bAHI_WatchdogResetEvent())
     {
-        DBG_vPrintf(TRACE_EXCEPTION, "\nAPP: Watchdog timer has reset device!");
+        DBG_vPrintf(TRACE_EXCEPTION, "APP: Watchdog timer has reset device!\n");
         #if HALT_ON_EXCEPTION
             vAHI_WatchdogStop();
             while (1);
@@ -315,7 +314,7 @@ PUBLIC void vAppMain(void)
 #endif
 
     #if JENNIC_CHIP_FAMILY == JN516x
-        DBG_vPrintf(TRACE_START, "\nHeap size at step 2a is %d bytes (start=%08x end=%08x)", u32HeapEnd - u32HeapStart, u32HeapStart, u32HeapEnd);
+        DBG_vPrintf(TRACE_START, "Heap size at step 2a is %d bytes (start=%08x end=%08x)\n", u32HeapEnd - u32HeapStart, u32HeapStart, u32HeapEnd);
     #endif
 
     /*
@@ -323,7 +322,7 @@ PUBLIC void vAppMain(void)
      * */
     OS_vStart(vInitialiseApp, vUnclaimedInterrupt, vOSError);
     #if JENNIC_CHIP_FAMILY == JN516x
-        DBG_vPrintf(TRACE_START, "\nHeap size at step 2b is %d bytes (start=%08x end=%08x)", u32HeapEnd - u32HeapStart, u32HeapStart, u32HeapEnd);
+        DBG_vPrintf(TRACE_START, "Heap size at step 2b is %d bytes (start=%08x end=%08x)\n", u32HeapEnd - u32HeapStart, u32HeapStart, u32HeapEnd);
     #endif
 
     /*
@@ -389,9 +388,9 @@ PRIVATE void vSetUpWakeUpConditions(void)
     if ( bDeepSleep)
     {
         u32AHI_DioWakeStatus();             /* clear interrupts */
-        vAHI_DioSetDirection(POWER_BTN,0);  /* Set Power Button(DIO0) as Input  */
-        vAHI_DioWakeEdge(0,POWER_BTN);      /* Set wake up as DIO Falling Edge  */
-        vAHI_DioWakeEnable(POWER_BTN,0);    /* Enable Wake up DIO Power Button  */
+        vAHI_DioSetDirection(WAKE_BTN,0);  /* Set Power Button(DIO0) as Input  */
+        vAHI_DioWakeEdge(0,WAKE_BTN);      /* Set wake up as DIO Falling Edge  */
+        vAHI_DioWakeEnable(WAKE_BTN,0);    /* Enable Wake up DIO Power Button  */
     }
 
 }
@@ -415,7 +414,7 @@ PRIVATE void vInitialiseApp(void)
 {
 
     #if JENNIC_CHIP_FAMILY == JN516x
-        DBG_vPrintf(TRACE_START, "\nHeap size at step 3 is %d bytes (start=%08x end=%08x)", u32HeapEnd - u32HeapStart, u32HeapStart, u32HeapEnd);
+        DBG_vPrintf(TRACE_START, "Heap size at step 3 is %d bytes (start=%08x end=%08x)\n", u32HeapEnd - u32HeapStart, u32HeapStart, u32HeapEnd);
     #endif
 
     /*
@@ -426,7 +425,7 @@ PRIVATE void vInitialiseApp(void)
     PWRM_vInit(E_AHI_SLEEP_OSCON_RAMON);
 
     #if JENNIC_CHIP_FAMILY == JN516x
-        DBG_vPrintf(TRACE_START, "\nHeap size at step 4 is %d bytes (start=%08x end=%08x)", u32HeapEnd - u32HeapStart, u32HeapStart, u32HeapEnd);
+        DBG_vPrintf(TRACE_START, "Heap size at step 4 is %d bytes (start=%08x end=%08x)\n", u32HeapEnd - u32HeapStart, u32HeapStart, u32HeapEnd);
     #endif
 
     /* Initialise the Persistent Data Manager */
@@ -435,19 +434,19 @@ PRIVATE void vInitialiseApp(void)
 
 
     #if JENNIC_CHIP_FAMILY == JN516x
-        DBG_vPrintf(TRACE_START, "\nHeap size at step 5 is %d bytes (start=%08x end=%08x)", u32HeapEnd - u32HeapStart, u32HeapStart, u32HeapEnd);
+        DBG_vPrintf(TRACE_START, "Heap size at step 5 is %d bytes (start=%08x end=%08x)\n", u32HeapEnd - u32HeapStart, u32HeapStart, u32HeapEnd);
     #endif
 
     /* Initialise Protocol Data Unit Manager */
     PDUM_vInit();
     #if JENNIC_CHIP_FAMILY == JN516x
-        DBG_vPrintf(TRACE_START, "\nHeap size at step 6 is %d bytes (start=%08x end=%08x)", u32HeapEnd - u32HeapStart, u32HeapStart, u32HeapEnd);
+        DBG_vPrintf(TRACE_START, "Heap size at step 6 is %d bytes (start=%08x end=%08x)\n", u32HeapEnd - u32HeapStart, u32HeapStart, u32HeapEnd);
     #endif
 
     /* initialise application */
     APP_vInitialiseNode();
     #if JENNIC_CHIP_FAMILY == JN516x
-        DBG_vPrintf(TRACE_START, "\nHeap size at step 7 is %d bytes (start=%08x end=%08x)", u32HeapEnd - u32HeapStart, u32HeapStart, u32HeapEnd);
+        DBG_vPrintf(TRACE_START, "Heap size at step 7 is %d bytes (start=%08x end=%08x)\n", u32HeapEnd - u32HeapStart, u32HeapStart, u32HeapEnd);
     #endif
 }
 
@@ -487,7 +486,7 @@ PRIVATE void vOSError(OS_teStatus eStatus, void *hObject)
 
 PRIVATE void vPdmEventHandlerCallback(uint32 u32EventNumber, PDM_eSystemEventCode eSystemEventCode)
 {
-    DBG_vPrintf(TRACE_EXCEPTION, "\nPDM: Event %x:%d", u32EventNumber, eSystemEventCode);
+    DBG_vPrintf(TRACE_EXCEPTION, "PDM: Event %x:%d\n", u32EventNumber, eSystemEventCode);
 }
 
 /****************************************************************************

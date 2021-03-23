@@ -4,3 +4,5 @@
 1616185613552	Delete resource 'JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/LBI'
 1616189840533	Delete resource 'JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/app_led_control.h'
 1616189842559	Delete resource 'JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/app_led_control.c'
+1616335580399	Delete 2 resources
+1616360321513	Delete resource 'JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Build/BuildAllControllers.sh'

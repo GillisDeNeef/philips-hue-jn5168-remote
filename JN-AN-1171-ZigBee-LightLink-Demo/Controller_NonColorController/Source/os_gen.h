@@ -6,7 +6,7 @@
  *
  * COMPONENT:      os_gen.h
  *
- * DATE:           Fri Mar 19 23:06:51 2021
+ * DATE:           Tue Mar 23 13:00:35 2021
  *
  * AUTHOR:         Jennic RTOS Configuration Tool
  *
@@ -66,6 +66,7 @@
 /* Module JN_AN_1171_ZigBee_LightLink_Demo */
 
 /* Cooperative Task Handles */
+#define APP_ButtonsScanTask ((OS_thTask)&os_Task_APP_ButtonsScanTask)
 #define APP_ID_Task ((OS_thTask)&os_Task_APP_ID_Task)
 #define APP_Commission_Task ((OS_thTask)&os_Task_APP_Commission_Task)
 #define APP_AddGroupTask ((OS_thTask)&os_Task_APP_AddGroupTask)
@@ -87,6 +88,7 @@
 
 /* Timer Handles */
 #define APP_cntrTickTimer ((OS_thHWCounter)&os_HWCounter_APP_cntrTickTimer)
+#define APP_ButtonsScanTimer ((OS_thSWTimer)&os_SWTimer_APP_cntrTickTimer_APP_ButtonsScanTimer)
 #define APP_AddGroupTimer ((OS_thSWTimer)&os_SWTimer_APP_cntrTickTimer_APP_AddGroupTimer)
 #define APP_PollTimer ((OS_thSWTimer)&os_SWTimer_APP_cntrTickTimer_APP_PollTimer)
 #define APP_CommissionTimer ((OS_thSWTimer)&os_SWTimer_APP_cntrTickTimer_APP_CommissionTimer)
@@ -117,6 +119,7 @@ extern struct _os_tsMessage os_Message_zps_msgMcpsDcfmInd;
 extern struct _os_tsMessage os_Message_zps_msgMcpsDcfm;
 
 /* Cooperative Task Handles */
+extern struct _os_tsTask os_Task_APP_ButtonsScanTask;
 extern struct _os_tsTask os_Task_APP_ID_Task;
 extern struct _os_tsTask os_Task_APP_Commission_Task;
 extern struct _os_tsTask os_Task_APP_AddGroupTask;
@@ -134,6 +137,7 @@ extern struct _os_tsMessage os_Message_APP_CommissionEvents;
 
 /* Timer Handles */
 extern struct _os_tsHWCounter os_HWCounter_APP_cntrTickTimer;
+extern struct _os_tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_ButtonsScanTimer;
 extern struct _os_tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_AddGroupTimer;
 extern struct _os_tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_PollTimer;
 extern struct _os_tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_CommissionTimer;

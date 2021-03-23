@@ -85,7 +85,6 @@ c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Controller_NonColo
  c:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/General/Include/LevelControl.h \
  c:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/General/Include/Groups.h \
  c:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Profiles/ZLL/Include/commission_endpoint.h \
- c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/DriverCapTouch.h \
  c:\nxp\bstudio_nxp\sdk\tools\ba-elf-ba2-r36379\bin\../lib/gcc/ba-elf/4.7.4/../../../../ba-elf/include/string.h \
  c:\nxp\bstudio_nxp\sdk\tools\ba-elf-ba2-r36379\bin\../lib/gcc/ba-elf/4.7.4/../../../../ba-elf/include/sys/cdefs.h \
  c:\nxp\bstudio_nxp\sdk\tools\ba-elf-ba2-r36379\bin\../lib/gcc/ba-elf/4.7.4/../../../../ba-elf/include/sys/string.h
@@ -259,8 +258,6 @@ c:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/General/Include/LevelC
 c:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/General/Include/Groups.h:
 
 c:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Profiles/ZLL/Include/commission_endpoint.h:
-
-c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/DriverCapTouch.h:
 
 c:\nxp\bstudio_nxp\sdk\tools\ba-elf-ba2-r36379\bin\../lib/gcc/ba-elf/4.7.4/../../../../ba-elf/include/string.h:
 

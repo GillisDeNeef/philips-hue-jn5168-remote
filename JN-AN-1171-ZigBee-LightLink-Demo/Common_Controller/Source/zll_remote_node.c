@@ -59,7 +59,7 @@
 #include "PDM_IDs.h"
 
 #include "app_timer_driver.h"
-#include "app_captouch_buttons.h"
+#include "app_buttons.h"
 #include "zll_remote_node.h"
 
 #include "eventStrings.h"
@@ -138,7 +138,6 @@
 /***        Local Function Prototypes                                     ***/
 /****************************************************************************/
 
-PUBLIC void vDisplayNwkKey(void);
 PUBLIC void vU16ToString(char * str, uint16 u16Num);
 
 
@@ -155,7 +154,6 @@ PRIVATE void vWakeCallBack(void);
 PUBLIC void vStopAllTimers(void);
 
 PRIVATE void vSendPermitJoin(void);
-PUBLIC void vAppMoveToColourTemperature( uint16 u16ColourTemperatureMired, uint16 u16StepsPerSec);
 PUBLIC void vFactoryResetRecords( void);
 
 PRIVATE void vDiscoverNetworks(void);
@@ -178,19 +176,14 @@ PRIVATE void vResetSleepAndJoinCounters(void);
 PRIVATE uint8 u8SearchEndpointTable(APP_tsEventTouchLink *psEndpointData,
         uint8* pu8Index);
 
-
-
 /****************************************************************************/
 /***        Exported Variables                                            ***/
 /****************************************************************************/
 PRIVATE char *apcStateNames[] = { "E_STARTUP", "E_NFN_START", "E_WAIT_START",
                                   "E_NETWORK_DISCOVER", "E_RUNNING" };
 
-
 tsZllEndpointInfoTable sEndpointTable;
 tsZllGroupInfoTable sGroupTable;
-
-
 
 extern bool_t bDeepSleep;
 
@@ -247,7 +240,6 @@ static const uint8 s_au8ZllLnkKeyArray[16] = {0xd0, 0xd1, 0xd2, 0xd3, 0xd4, 0xd5
 /****************************************************************************/
 extern void zps_vNwkSecClearMatSet(void *psNwk);
 
-
 /****************************************************************************
  *
  * NAME: vDiscoverNetworks
@@ -260,8 +252,8 @@ extern void zps_vNwkSecClearMatSet(void *psNwk);
  *
  ****************************************************************************/
 PRIVATE void vDiscoverNetworks(void) {
-uint8 u8Status;
-void* pvNwk;
+	uint8 u8Status;
+	void* pvNwk;
 
     pvNwk = ZPS_pvAplZdoGetNwkHandle();
     while (u8ChanIdx < sizeof(u8DiscChannels))
@@ -332,6 +324,7 @@ uint8 u8Status;
         vDiscoverNetworks();
     }
 }
+
 /****************************************************************************
  *
  * NAME: vAppSetGroupId
@@ -393,23 +386,21 @@ PUBLIC tsZllGroupInfoTable * psGetGroupRecordTable(void)
  ****************************************************************************/
 PUBLIC void APP_vInitialiseNode(void)
 {
-    DBG_vPrintf(TRACE_APP, "\nAPP_vInitialiseNode*");
+    DBG_vPrintf(TRACE_APP, "APP_vInitialiseNode*\n");
 
     sZllState.eNodeState = E_REMOTE_STARTUP;
 
     uint16 u16BytesRead;
 
-
     /* Initialise buttons;
      */
     APP_bButtonInitialise();
-
 
     PDM_eReadDataFromRecord(PDM_ID_APP_ZLL_CMSSION, &sZllState,sizeof(tsZllRemoteState), &u16BytesRead);
     PDM_eReadDataFromRecord(PDM_ID_APP_END_P_TABLE, &sEndpointTable, sizeof(tsZllEndpointInfoTable), &u16BytesRead);
     PDM_eReadDataFromRecord(PDM_ID_APP_GROUP_TABLE, &sGroupTable, sizeof(tsZllGroupInfoTable), &u16BytesRead);
 
-    DBG_vPrintf(TRACE_APP, "\nContext state:%s(%d) Zll FN %02x",
+    DBG_vPrintf(TRACE_APP, "Context state:%s(%d) Zll FN %02x\n",
             apcStateNames[sZllState.eNodeState], sZllState.eNodeState,
             sZllState.eState);
 
@@ -438,16 +429,16 @@ PUBLIC void APP_vInitialiseNode(void)
      */
     if ((sZllState.eNodeState == E_REMOTE_RUNNING) || (ZPS_psAplAibGetAib()->u64ApsUseExtendedPanid != 0))
     {
-        DBG_vPrintf(TRACE_APP, "\nNon Factory New Start");
+        DBG_vPrintf(TRACE_APP, "Non Factory New Start\n");
         sZllState.eNodeState = E_REMOTE_NFN_START;
     }
     else
     {
         sZllState.u8MyChannel = au8ZLLChannelSet[0];
         ZPS_vNwkNibSetChannel( ZPS_pvAplZdoGetNwkHandle(), sZllState.u8MyChannel);
-        DBG_vPrintf(TRACE_REMOTE_NODE, "\nStart out on ch %d", sZllState.u8MyChannel);
+        DBG_vPrintf(TRACE_REMOTE_NODE, "Start out on ch %d\n", sZllState.u8MyChannel);
         /* Stay awake for joining */
-        DBG_vPrintf(TRACE_APP, "\nFactory New Start");
+        DBG_vPrintf(TRACE_APP, "Factory New Start\n");
 
         /* Setting random PANId for Factory New remote */
         ZPS_vNwkNibSetPanId(ZPS_pvAplZdoGetNwkHandle(),
@@ -473,7 +464,7 @@ PUBLIC void APP_vInitialiseNode(void)
  ****************************************************************************/
 PRIVATE void vPickChannel( void *pvNwk)
 {
-    DBG_vPrintf(TRACE_CLASSIC, "\nPicked Ch %d", sZllState.u8MyChannel);
+    DBG_vPrintf(TRACE_CLASSIC, "Picked Ch %d\n", sZllState.u8MyChannel);
     ZPS_vNwkNibSetChannel( ZPS_pvAplZdoGetNwkHandle(), sZllState.u8MyChannel);
     ZPS_vNwkNibSetPanId( pvNwk, (uint16)RND_u32GetRand(1, 0xfff0) );
     /* Set channel mask to primary channels */
@@ -498,10 +489,10 @@ PUBLIC void vStartPolling(void) {
     if (OS_eGetSWTimerStatus(APP_PollTimer) == OS_E_SWTIMER_RUNNING)
     {
         OS_eStopSWTimer(APP_PollTimer);
-        DBG_vPrintf(TRACE_REMOTE_NODE, "\nStop App_PollTimer");
+        DBG_vPrintf(TRACE_REMOTE_NODE, "Stop App_PollTimer\n");
     }
     u8Start = OS_eStartSWTimer(APP_PollTimer, POLL_TIME_FAST, NULL);
-    DBG_vPrintf(TRACE_REMOTE_NODE, "\nStart Fpoll start %d", u8Start);
+    DBG_vPrintf(TRACE_REMOTE_NODE, "Start Fpoll start %d\n", u8Start);
 }
 
 /****************************************************************************
@@ -571,7 +562,7 @@ OS_TASK(APP_ZLL_Remote_Task)
     {
         if (sStackEvent.eType == ZPS_EVENT_APS_DATA_INDICATION)
         {
-            DBG_vPrintf(TRACE_APP, "\nDATAIND: PF :%x CL :%x EP: %x",
+            DBG_vPrintf(TRACE_APP, "DATAIND: PF :%x CL :%x EP: %x\n",
                         sStackEvent.uEvent.sApsDataIndEvent.u16ProfileId,
                         sStackEvent.uEvent.sApsDataIndEvent.u16ClusterId,
                         sStackEvent.uEvent.sApsDataIndEvent.u8DstEndpoint);
@@ -579,7 +570,7 @@ OS_TASK(APP_ZLL_Remote_Task)
     }
     else if (OS_eCollectMessage(APP_msgEvents, &sAppEvent) == OS_E_OK)
     {
-        DBG_vPrintf(TRACE_APP, "\n%s(%d) in state %s(%d)",
+        DBG_vPrintf(TRACE_APP, "%s(%d) in state %s(%d)\n",
                     apcAPPEventStrings[sAppEvent.eType],sAppEvent.eType,
                     apcStateNames[sZllState.eNodeState],sZllState.eNodeState);
     }
@@ -606,58 +597,52 @@ OS_TASK(APP_ZLL_Remote_Task)
     /* State-dependent actions */
     switch (sZllState.eNodeState)
     {
+		case E_REMOTE_STARTUP:
+			/* factory new start up */
+			sZllState.eNodeState = E_REMOTE_WAIT_START;
+			u8KeepAliveTime = KEEP_ALIVE_FACTORY_NEW;
+			OS_eActivateTask(APP_ZLL_Remote_Task);
+			OS_eStartSWTimer(APP_PollTimer, APP_TIME_MS(1000), NULL);
+			break;
 
-    case E_REMOTE_STARTUP:
-        /* factory new start up */
-        sZllState.eNodeState = E_REMOTE_WAIT_START;
-        u8KeepAliveTime = KEEP_ALIVE_FACTORY_NEW;
-        OS_eActivateTask(APP_ZLL_Remote_Task);
-        OS_eStartSWTimer(APP_PollTimer, APP_TIME_MS(1000), NULL);
-        break;
+		case E_REMOTE_WAIT_START:
+			/* Wait for touchlink to form network or classicval join
+			 * if nothing happens Sleep and Join task will force deep sleep
+			 */
+			if (sAppEvent.eType == APP_E_EVENT_BUTTON_DOWN)
+			{
+				vHandleWaitStartAppEvent(&sAppEvent);
+			}
+			if (sStackEvent.eType != ZPS_EVENT_NONE) {
+				vHandleWaitStartStackEvent(&sStackEvent);
+			}
+			break;
 
-    case E_REMOTE_WAIT_START:
-        /* Wait for touchlink to form network
-         * or classicval join
-         * if nothing happens Sleep and Join task will force deep sleep
-         */
+		case E_REMOTE_NETWORK_DISCOVER:
+			vHandleClassicDiscoveryAndJoin(&sStackEvent);
+			break;
 
-        if (sAppEvent.eType == APP_E_EVENT_BUTTON_DOWN)
-        {
-            vHandleWaitStartAppEvent(&sAppEvent);
-        }
+		case E_REMOTE_NFN_START:
+			sZllState.eNodeState = E_REMOTE_RUNNING;
+			/* Device already in the network */
+			vSetRejoinFilter();
+			bFailedToJoin = TRUE;
+			ZPS_eAplZdoRejoinNetwork(FALSE);
+			DBG_vPrintf(TRACE_APP|TRACE_REJOIN, "\nAPP: Re-start Stack... with rejoin\n" );
+			OS_eStartSWTimer(APP_PollTimer, APP_TIME_MS(1000), NULL);
+			break;
 
-        if (sStackEvent.eType != ZPS_EVENT_NONE) {
-            vHandleWaitStartStackEvent(&sStackEvent);
-        }
-        break;
+		case E_REMOTE_RUNNING:
+			if (sStackEvent.eType != ZPS_EVENT_NONE) {
+				vHandleRunningStackEvent( &sStackEvent);
+			}
+			if (sAppEvent.eType != APP_E_EVENT_NONE) {
+				vHandleRunningAppEvent( &sAppEvent);
+			}
+			break;
 
-    case E_REMOTE_NETWORK_DISCOVER:
-        vHandleClassicDiscoveryAndJoin(&sStackEvent);
-        break;
-
-    case E_REMOTE_NFN_START:
-        sZllState.eNodeState = E_REMOTE_RUNNING;
-        /* Device already in the network */
-        vSetRejoinFilter();
-        bFailedToJoin = TRUE;
-       ZPS_eAplZdoRejoinNetwork(FALSE);
-       DBG_vPrintf(TRACE_APP|TRACE_REJOIN, "\nAPP: Re-start Stack... with rejoin\n" );
-       OS_eStartSWTimer(APP_PollTimer, APP_TIME_MS(1000), NULL);
-       break;
-
-    case E_REMOTE_RUNNING:
-        if (sStackEvent.eType != ZPS_EVENT_NONE) {
-            vHandleRunningStackEvent( &sStackEvent);
-        }
-
-        if (sAppEvent.eType != APP_E_EVENT_NONE) {
-            vHandleRunningAppEvent( &sAppEvent);
-        }
-        break;
-
-    default:
-        break;
-
+		default:
+			break;
     }
 
     /*
@@ -687,27 +672,27 @@ PRIVATE void vHandleWaitStartAppEvent(APP_tsEvent* psAppEvent)
     switch (psAppEvent->uEvent.sButton.u8Button)
     {
         case KEY_8:
-            bSendFactoryResetOverAir=TRUE;
+            //bSendFactoryResetOverAir=TRUE;
             break;
 
         case KEY_16:
             /*Add to Group 0 */
-            vAppSetGroupId(0);
-            sEvent.eType = APP_E_COMMISION_START;
-            OS_ePostMessage(APP_CommissionEvents, &sEvent);
+            //vAppSetGroupId(0);
+            //sEvent.eType = APP_E_COMMISION_START;
+            //OS_ePostMessage(APP_CommissionEvents, &sEvent);
             break;
 
         case KEY_1:      // !!!!!!!!!!
             // try classic discover and join
-            u8ChanIdx = 0;
-            vDiscoverNetworks();
-            sZllState.eNodeState = E_REMOTE_NETWORK_DISCOVER;
+            //u8ChanIdx = 0;
+            //vDiscoverNetworks();
+            //sZllState.eNodeState = E_REMOTE_NETWORK_DISCOVER;
             break;
 
         case KEY_4:
-            DBG_vPrintf(TRACE_APP, "\nAPP: Erasing flash records");
-            PDM_vDeleteAllDataRecords();
-            vAHI_SwReset();
+            //DBG_vPrintf(TRACE_APP, "APP: Erasing flash records\n");
+            //PDM_vDeleteAllDataRecords();
+            //vAHI_SwReset();
             break;
 
         default:
@@ -731,44 +716,44 @@ PRIVATE void vHandleRunningAppEvent(APP_tsEvent* psAppEvent)
     switch(psAppEvent->eType)
     {
 
-    case APP_E_EVENT_NONE:
-        break;
+		case APP_E_EVENT_NONE:
+			break;
 
-    case APP_E_EVENT_BUTTON_DOWN:
-        {
-            teUserKeyCodes eKeyCode = psAppEvent->uEvent.sButton.u8Button;
+		case APP_E_EVENT_BUTTON_DOWN:
+			{
+				teUserKeyCodes eKeyCode = psAppEvent->uEvent.sButton.u8Button;
 
-            #if (defined DUT_CONTROLLER)
-                DUT_vHandleKeyPress(eKeyCode);
-            #else
-                // Hook to rejoin the network if the Light was unavailable
-                if(bFailedToJoin && (u8RejoinAttemptsRemaining==0) &&
-                   (KEY_16 != eKeyCode)  &&
-                   ( bTLinkInProgress == FALSE))
-                {
-                    vSetRejoinFilter();
-                    ZPS_eAplZdoRejoinNetwork(TRUE);
-                    u8RejoinAttemptsRemaining = ZLL_MAX_REJOIN_ATTEMPTS;
-                }
-                else
-                {
-                    APP_vHandleKeyPress(eKeyCode);
-                }
-            #endif
+				#if (defined DUT_CONTROLLER)
+					DUT_vHandleKeyPress(eKeyCode);
+				#else
+					// Hook to rejoin the network if the Light was unavailable
+					if(bFailedToJoin && (u8RejoinAttemptsRemaining==0) &&
+					   (KEY_16 != eKeyCode)  &&
+					   ( bTLinkInProgress == FALSE))
+					{
+						vSetRejoinFilter();
+						ZPS_eAplZdoRejoinNetwork(TRUE);
+						u8RejoinAttemptsRemaining = ZLL_MAX_REJOIN_ATTEMPTS;
+					}
+					else
+					{
+						APP_vHandleKeyPress(eKeyCode);
+					}
+				#endif
 
-            u8KeepAliveTime = KEEP_ALIVETIME;
-            u8DeepSleepTime = DEEP_SLEEPTIME;
-        }
-        break;
+				u8KeepAliveTime = KEEP_ALIVETIME;
+				u8DeepSleepTime = DEEP_SLEEPTIME;
+			}
+			break;
 
-    case APP_E_EVENT_BUTTON_UP:
-        #if !(defined DUT_CONTROLLER)
-            APP_vHandleKeyRelease(psAppEvent->uEvent.sButton.u8Button);
-        #endif
-        break;
+		case APP_E_EVENT_BUTTON_UP:
+			#if !(defined DUT_CONTROLLER)
+				APP_vHandleKeyRelease(psAppEvent->uEvent.sButton.u8Button);
+			#endif
+			break;
 
-    default:
-        break;
+		default:
+			break;
     }
 }
 
@@ -787,7 +772,7 @@ PRIVATE void vHandleWaitStartStackEvent(ZPS_tsAfEvent* psStackEvent)
     switch (psStackEvent->eType)
     {
         case ZPS_EVENT_NWK_JOINED_AS_ENDDEVICE:
-            DBG_vPrintf(TRACE_REMOTE_NODE|TRACE_REJOIN, "\nWAIT START Joined as Ed");
+            DBG_vPrintf(TRACE_REMOTE_NODE|TRACE_REJOIN, "WAIT START Joined as Ed\n");
             vResetSleepAndJoinCounters();
             bTLinkInProgress = FALSE;
             sZllState.eNodeState = E_REMOTE_RUNNING;
@@ -1000,7 +985,7 @@ PRIVATE void vAppHandleTouchLink(APP_tsEvent* psAppEvent)
     tsCLD_ZllDeviceTable * psDevTab = (tsCLD_ZllDeviceTable*)psGetDeviceTable();
     uint8 u8SeqNo;
 
-    DBG_vPrintf(TRACE_REMOTE_NODE, "\nTLink %04x Ep %d Dev %04x", psAppEvent->uEvent.sTouchLink.u16NwkAddr,
+    DBG_vPrintf(TRACE_REMOTE_NODE, "TLink %04x Ep %d Dev %04x\n", psAppEvent->uEvent.sTouchLink.u16NwkAddr,
             psAppEvent->uEvent.sTouchLink.u8Endpoint,
             psAppEvent->uEvent.sTouchLink.u16DeviceID);
 
@@ -1018,7 +1003,7 @@ PRIVATE void vAppHandleTouchLink(APP_tsEvent* psAppEvent)
         sPayload.u8Endpoint = psDevTab->asDeviceRecords[0].u8Endpoint;
         sPayload.u8Version = psDevTab->asDeviceRecords[0].u8Version;
 
-        DBG_vPrintf(TRACE_REMOTE_NODE, "\nTell new controller about us %04x", psAppEvent->uEvent.sTouchLink.u16NwkAddr);
+        DBG_vPrintf(TRACE_REMOTE_NODE, "Tell new controller about us %04x\n", psAppEvent->uEvent.sTouchLink.u16NwkAddr);
 
         sDestinationAddress.eAddressMode = E_ZCL_AM_SHORT_NO_ACK;
         sDestinationAddress.uAddress.u16DestinationAddress = psAppEvent->uEvent.sTouchLink.u16NwkAddr;
@@ -1162,17 +1147,16 @@ PRIVATE void vAppHandleEndpointList(APP_tsEvent* psAppEvent)
  ****************************************************************************/
 PRIVATE void vAppHandleGroupList(APP_tsEvent* psAppEvent)
 {
-    DBG_vPrintf(TRACE_REMOTE_NODE, "\ngot gp list with %d", psAppEvent->uEvent.sGroupListMsg.sPayload.u8Count);
+    DBG_vPrintf(TRACE_REMOTE_NODE, "got gp list with %d\n", psAppEvent->uEvent.sGroupListMsg.sPayload.u8Count);
     int i;
 
     for (i=0; i<psAppEvent->uEvent.sGroupListMsg.sPayload.u8Count; i++)
     {
-        DBG_vPrintf(TRACE_REMOTE_NODE, "\nGroup %04x %d",
+        DBG_vPrintf(TRACE_REMOTE_NODE, "Group %04x %d\n",
                 psAppEvent->uEvent.sGroupListMsg.sPayload.asGroupRecords[i].u16GroupID,
                 psAppEvent->uEvent.sGroupListMsg.sPayload.asGroupRecords[i].u8GroupType);
     }
 }
-
 
 /****************************************************************************
  *
@@ -1234,63 +1218,62 @@ PRIVATE void APP_vHandleKeyPress(teUserKeyCodes eKeyCode)
 	switch (eKeyCode)
 	{
 		case KEY_1: // Brightness Up
-			vAppLevelMove(E_CLD_LEVELCONTROL_MOVE_MODE_UP, LEVEL_CHANGE_STEPS_PER_SEC_FAST, TRUE);
+			//vAppLevelMove(E_CLD_LEVELCONTROL_MOVE_MODE_UP, LEVEL_CHANGE_STEPS_PER_SEC_FAST, TRUE);
 			break;
 
 		case KEY_4: // On
-			vAppOnOff(E_CLD_ONOFF_CMD_ON);
+			//vAppOnOff(E_CLD_ONOFF_CMD_ON);
 			break;
 
 		case KEY_5: // Brightness Down
-			vAppLevelMove(E_CLD_LEVELCONTROL_MOVE_MODE_DOWN, LEVEL_CHANGE_STEPS_PER_SEC_FAST, FALSE);
+			//vAppLevelMove(E_CLD_LEVELCONTROL_MOVE_MODE_DOWN, LEVEL_CHANGE_STEPS_PER_SEC_FAST, FALSE);
 			break;
 
 		case KEY_8: // Off
 			//vAppOnOff( E_CLD_ONOFF_CMD_OFF_EFFECT);
-			vAppOnOff( E_CLD_ONOFF_CMD_OFF);
+			//vAppOnOff( E_CLD_ONOFF_CMD_OFF);
 			break;
 
 		case KEY_10: // Reset Self to Factory New
-			if (u8SelfFR==0)u8SelfFR=1;
-			if(u8SelfFR==2)
-			{
-				u8SelfFR=0;
-				void *pvNwk = ZPS_pvAplZdoGetNwkHandle();
-				ZPS_tsNwkNib *psNib = ZPS_psNwkNibGetHandle( pvNwk);
-				u32OldFrameCtr = psNib->sTbl.u32OutFC + 10;
+			//if (u8SelfFR==0)u8SelfFR=1;
+			//if(u8SelfFR==2)
+			//{
+			//	u8SelfFR=0;
+			//	void *pvNwk = ZPS_pvAplZdoGetNwkHandle();
+			//	ZPS_tsNwkNib *psNib = ZPS_psNwkNibGetHandle( pvNwk);
+			//	u32OldFrameCtr = psNib->sTbl.u32OutFC + 10;
 
-				if (ZPS_E_SUCCESS !=  ZPS_eAplZdoLeaveNetwork(0, FALSE,FALSE)) {
+			//	if (ZPS_E_SUCCESS !=  ZPS_eAplZdoLeaveNetwork(0, FALSE,FALSE)) {
 					/* Leave failed, probably lost parent, so just reset everything */
 
-					vFactoryResetRecords();
+			//		vFactoryResetRecords();
 					/* force a restart */
-					vAHI_SwReset();
-				}
-			}
+			//		vAHI_SwReset();
+			//	}
+			//}
 			break;
 
 		case KEY_11:
-			vSendPermitJoin();
+			//vSendPermitJoin();
 			break;
 
 		case KEY_15: // Factory Reset TouchLink Target
-			 sEvent.eType = APP_E_COMMISION_START;
-			 bSendFactoryResetOverAir = TRUE;
-			 OS_ePostMessage(APP_CommissionEvents, &sEvent);
+			 //sEvent.eType = APP_E_COMMISION_START;
+			 //bSendFactoryResetOverAir = TRUE;
+			 //OS_ePostMessage(APP_CommissionEvents, &sEvent);
 			 break;
 
 		case KEY_16: // TouchLink and Add to Default Group
-			 vAppSetGroupId(0);
-			 sEvent.eType = APP_E_COMMISION_START;
-			 u8RejoinAttemptsRemaining = 10;
-			 OS_ePostMessage(APP_CommissionEvents, &sEvent);
+			 //vAppSetGroupId(0);
+			 //sEvent.eType = APP_E_COMMISION_START;
+			 //u8RejoinAttemptsRemaining = 10;
+			 //OS_ePostMessage(APP_CommissionEvents, &sEvent);
 			 break;
 
 		default : //Default
 			break;
 	}
 }
-
 
 /****************************************************************************
  *
@@ -1309,17 +1292,16 @@ PRIVATE void APP_vHandleKeyRelease(teUserKeyCodes eKeyCode)
 	switch(eKeyCode)
 	{
 		case KEY_1:
-			vAppLevelStop();
+			//vAppLevelStop();
 			break;
 		case KEY_5:
-			vAppLevelStop();
+			//vAppLevelStop();
 			break;
 
 		default : //Default
 			break;
 	}
 }
-
 
 
 /****************************************************************************
@@ -1874,9 +1856,9 @@ void vStartUpHW(void)
     /* Restart the keyboard scanning timer as we've come up through */
     /* warm start via the Power Manager if we get here              */
 
-    vConfigureScanTimer();
+    //vConfigureScanTimer();
 
-     DBG_vPrintf(TRACE_SLEEP, "\nWoken: start poll timer,");
+     DBG_vPrintf(TRACE_SLEEP, "Woken: start poll timer,");
      u8Status = ZPS_eAplZdoPoll();
      DBG_vPrintf(TRACE_SLEEP, " Wake poll %02x\n", u8Status);
      OS_eStartSWTimer(APP_PollTimer, APP_TIME_MS(200), NULL);
@@ -1908,7 +1890,7 @@ PRIVATE void vWakeCallBack(void)
         u8DeepSleepTime--;
 #endif
     }
-    vConfigureScanTimer();
+    //vConfigureScanTimer();
     bAddrMode = TRUE;
 }
 
@@ -1935,18 +1917,18 @@ PRIVATE uint8 u8SearchEndpointTable(APP_tsEventTouchLink *psEndpointData, uint8*
                 (psEndpointData->u8Endpoint == sEndpointTable.asEndpointRecords[i].u8Endpoint)) {
             /* same ep on same device already known about */
             *pu8Index = i;
-            DBG_vPrintf(TRACE_REMOTE_NODE, "\nPresent");
+            DBG_vPrintf(TRACE_REMOTE_NODE, "Present\n");
             return 1;
         }
         if ((sEndpointTable.asEndpointRecords[i].u16NwkAddr == 0) && !bGotFree) {
             *pu8Index = i;
             bGotFree = TRUE;
-            DBG_vPrintf(TRACE_REMOTE_NODE, "\nFree slot %d", *pu8Index);
+            DBG_vPrintf(TRACE_REMOTE_NODE, "Free slot %d\n", *pu8Index);
         }
 
     }
 
-    DBG_vPrintf(TRACE_REMOTE_NODE, "\nNot found");
+    DBG_vPrintf(TRACE_REMOTE_NODE, "Not found\n");
     return (bGotFree)? 0: 3  ;
 }
 
@@ -2082,7 +2064,7 @@ PUBLIC void vSelectLight(void)
 
     } else {
 
-        DBG_vPrintf(TRACE_REMOTE_NODE|TRACE_LIGHT_AGE, "\nId %04x", sEndpointTable.asEndpointRecords[sEndpointTable.u8CurrentLight].u16NwkAddr);
+        DBG_vPrintf(TRACE_REMOTE_NODE|TRACE_LIGHT_AGE, "Id %04x\n", sEndpointTable.asEndpointRecords[sEndpointTable.u8CurrentLight].u16NwkAddr);
 
         uint8 u8Seq;
         tsZCL_Address sAddress;
@@ -2148,7 +2130,7 @@ PUBLIC bool bAddToEndpointTable(APP_tsEventTouchLink *psEndpointData) {
         sEndpointTable.asEndpointRecords[u8Index].u8Endpoint = psEndpointData->u8Endpoint;
         sEndpointTable.asEndpointRecords[u8Index].u8Version = psEndpointData->u8Version;
         sEndpointTable.au8PingCount[u8Index] = 0;
-        DBG_vPrintf(TRACE_REMOTE_NODE, "\nAdd idx %d Addr %04x Ep %d Dev %04x", u8Index,
+        DBG_vPrintf(TRACE_REMOTE_NODE, "Add idx %d Addr %04x Ep %d Dev %04x\n", u8Index,
                 sEndpointTable.asEndpointRecords[u8Index].u16NwkAddr,
                 sEndpointTable.asEndpointRecords[u8Index].u8Endpoint,
                 sEndpointTable.asEndpointRecords[u8Index].u16DeviceId);
@@ -2497,7 +2479,7 @@ OS_TASK(APP_SleepAndPollTask)
                            u32Time = POLL_TIME_FAST, NULL;
                            if (u16FastPoll == 0)
                            {
-                               DBG_vPrintf(TRACE_REMOTE_NODE, "\nStop fast poll");
+                               DBG_vPrintf(TRACE_REMOTE_NODE, "Stop fast poll\n");
                            }
                        }
                        else

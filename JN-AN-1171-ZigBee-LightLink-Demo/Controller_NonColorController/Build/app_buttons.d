@@ -1,5 +1,5 @@
-c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Controller_NonColorController/Build/app_captouch_buttons.o: \
- c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/app_captouch_buttons.c \
+c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Controller_NonColorController/Build/app_buttons.o: \
+ c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/app_buttons.c \
  c:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/Common/Include/jendefs.h \
  c:\nxp\bstudio_nxp\sdk\tools\ba-elf-ba2-r36379\bin\../lib/gcc/ba-elf/4.7.4/include/stdint.h \
  c:\nxp\bstudio_nxp\sdk\tools\ba-elf-ba2-r36379\bin\../lib/gcc/ba-elf/4.7.4/../../../../ba-elf/include/stdint.h \
@@ -70,8 +70,7 @@ c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Controller_NonColo
  c:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/ZCL/Clusters/LightLink/Include/zll_utility.h \
  c:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/Utilities/Include/app_timer_driver.h \
  c:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/PWRM/Include/pwrm.h \
- c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/app_captouch_buttons.h \
- c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/DriverCapTouch.h
+ c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/app_buttons.h
 
 c:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/Common/Include/jendefs.h:
 
@@ -213,6 +212,4 @@ c:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/Utilities/Include/app_timer_driver.
 
 c:/NXP/bstudio_nxp/sdk/JN-SW-4168/Components/PWRM/Include/pwrm.h:
 
-c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/app_captouch_buttons.h:
-
-c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/DriverCapTouch.h:
+c:/NXP/bstudio_nxp/workspace/JN-AN-1171-ZigBee-LightLink-Demo/Common_Controller/Source/app_buttons.h:

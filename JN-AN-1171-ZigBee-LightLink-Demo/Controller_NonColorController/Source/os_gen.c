@@ -6,7 +6,7 @@
  *
  * COMPONENT:      os_gen.c
  *
- * DATE:           Fri Mar 19 23:06:51 2021
+ * DATE:           Tue Mar 23 13:00:35 2021
  *
  * AUTHOR:         Jennic RTOS Configuration Tool
  *
@@ -129,6 +129,7 @@ struct _os_tsSWTimer {
 /* Module ZBPro */
 
 /* Module JN_AN_1171_ZigBee_LightLink_Demo */
+PUBLIC void os_vAPP_ButtonsScanTask(void);
 PUBLIC void os_vAPP_ID_Task(void);
 PUBLIC void os_vAPP_Commission_Task(void);
 PUBLIC void os_vAPP_AddGroupTask(void);
@@ -149,7 +150,6 @@ PRIVATE bool os_bStrictCheck(void * , void * , void *, unsigned int );
 PUBLIC void os_vzps_isrMAC(void);
 PUBLIC void os_vAPP_isrTickTimer(void);
 PUBLIC void os_vAPP_isrSystemController(void);
-PUBLIC void os_vAPP_isrKeyScan(void);
 PUBLIC uint32 OS_u32GetQueueSize(void * );
 
 /****************************************************************************/
@@ -158,14 +158,15 @@ PUBLIC uint32 OS_u32GetQueueSize(void * );
 
 
 /* Tasks */
-struct _os_tsTask os_Task_APP_ID_Task = { OS_TASK_MAGIC, 7, 8, 0, os_vAPP_ID_Task };
-struct _os_tsTask os_Task_APP_Commission_Task = { OS_TASK_MAGIC, 3, 8, 0, os_vAPP_Commission_Task };
-struct _os_tsTask os_Task_APP_AddGroupTask = { OS_TASK_MAGIC, 8, 8, 0, os_vAPP_AddGroupTask };
-struct _os_tsTask os_Task_APP_CommissionTimerTask = { OS_TASK_MAGIC, 5, 8, 0, os_vAPP_CommissionTimerTask };
-struct _os_tsTask os_Task_APP_ZLL_Remote_Task = { OS_TASK_MAGIC, 4, 8, 0, os_vAPP_ZLL_Remote_Task };
-struct _os_tsTask os_Task_APP_SleepAndPollTask = { OS_TASK_MAGIC, 1, 8, 0, os_vAPP_SleepAndPollTask };
-struct _os_tsTask os_Task_ZCL_Task = { OS_TASK_MAGIC, 6, 8, 0, os_vZCL_Task };
-struct _os_tsTask os_Task_zps_taskZPS = { OS_TASK_MAGIC, 2, 8, 0, os_vzps_taskZPS };
+struct _os_tsTask os_Task_APP_ButtonsScanTask = { OS_TASK_MAGIC, 9, 9, 0, os_vAPP_ButtonsScanTask };
+struct _os_tsTask os_Task_APP_ID_Task = { OS_TASK_MAGIC, 7, 9, 0, os_vAPP_ID_Task };
+struct _os_tsTask os_Task_APP_Commission_Task = { OS_TASK_MAGIC, 3, 9, 0, os_vAPP_Commission_Task };
+struct _os_tsTask os_Task_APP_AddGroupTask = { OS_TASK_MAGIC, 8, 9, 0, os_vAPP_AddGroupTask };
+struct _os_tsTask os_Task_APP_CommissionTimerTask = { OS_TASK_MAGIC, 5, 9, 0, os_vAPP_CommissionTimerTask };
+struct _os_tsTask os_Task_APP_ZLL_Remote_Task = { OS_TASK_MAGIC, 4, 9, 0, os_vAPP_ZLL_Remote_Task };
+struct _os_tsTask os_Task_APP_SleepAndPollTask = { OS_TASK_MAGIC, 1, 9, 0, os_vAPP_SleepAndPollTask };
+struct _os_tsTask os_Task_ZCL_Task = { OS_TASK_MAGIC, 6, 9, 0, os_vZCL_Task };
+struct _os_tsTask os_Task_zps_taskZPS = { OS_TASK_MAGIC, 2, 9, 0, os_vzps_taskZPS };
 
 /* Mutexs */
 tsMutex os_Mutex_mutexZPS = { OS_MUTEX_MAGIC, 8, 0, 0xff, 0xff };
@@ -255,8 +256,8 @@ tsMessage os_Message_APP_msgEvents = {
     8,
     sizeof(APP_tsEvent),
     &os_Task_APP_ZLL_Remote_Task,
-    8,
-    14
+    9,
+    0
 };
 
 PRIVATE ZPS_tsAfEvent s_aMessageData_APP_msgZpsEvents_ZCL[1];
@@ -291,6 +292,7 @@ tsMessage os_Message_APP_CommissionEvents = {
 
 /* Timers connected to 'APP_cntrTickTimer' */
 tsHWCounter os_HWCounter_APP_cntrTickTimer = { OS_HWCOUNTER_MAGIC, NULL, os_bAPP_cbSetTickTimerCompare, os_u32APP_cbGetTickTimer, os_vAPP_cbEnableTickTimer, os_vAPP_cbDisableTickTimer, 0 };
+tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_ButtonsScanTimer = { OS_SWTIMER_MAGIC, NULL, &os_HWCounter_APP_cntrTickTimer, NULL, &os_Task_APP_ButtonsScanTask, 0, OS_E_SWTIMER_STOPPED, FALSE };
 tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_AddGroupTimer = { OS_SWTIMER_MAGIC, NULL, &os_HWCounter_APP_cntrTickTimer, NULL, &os_Task_APP_AddGroupTask, 0, OS_E_SWTIMER_STOPPED, FALSE };
 tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_PollTimer = { OS_SWTIMER_MAGIC, NULL, &os_HWCounter_APP_cntrTickTimer, NULL, &os_Task_APP_SleepAndPollTask, 0, OS_E_SWTIMER_STOPPED, FALSE };
 tsSWTimer os_SWTimer_APP_cntrTickTimer_APP_CommissionTimer = { OS_SWTIMER_MAGIC, NULL, &os_HWCounter_APP_cntrTickTimer, NULL, &os_Task_APP_CommissionTimerTask, 0, OS_E_SWTIMER_STOPPED, FALSE };
@@ -310,6 +312,7 @@ PRIVATE struct _os_tsTask *s_asTasks[] = {
     &os_Task_ZCL_Task,
     &os_Task_APP_ID_Task,
     &os_Task_APP_AddGroupTask,
+    &os_Task_APP_ButtonsScanTask,
 };
 
 /****************************************************************************/
@@ -395,7 +398,11 @@ PRIVATE bool os_bStrictCheck(void *hTask, void *prvISR, void *hObject, unsigned 
 
         }
 
-        if (prvISR == os_vAPP_isrKeyScan)
+
+    }
+    else if (hTask)
+    {
+        if (hTask == &os_Task_APP_ButtonsScanTask)
         {
             if (*((uint32 *)hObject) == OS_MESSAGE_MAGIC)
             {
@@ -410,10 +417,6 @@ PRIVATE bool os_bStrictCheck(void *hTask, void *prvISR, void *hObject, unsigned 
 
         }
 
-
-    }
-    else if (hTask)
-    {
         if (hTask == &os_Task_APP_Commission_Task)
         {
             if (*((uint32 *)hObject) == OS_MUTEX_MAGIC)

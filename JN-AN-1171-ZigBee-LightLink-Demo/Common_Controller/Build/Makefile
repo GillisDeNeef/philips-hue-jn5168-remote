@@ -140,7 +140,7 @@ DEV_BLD_DIR         = $(APP_BASE)/$(TARGET)/Build
 DEV_SRC_DIR         = $(APP_BASE)/$(TARGET)/Source
 
 #Generic Low Battery Indicator module (SVN external)
-APP_LBI_SRC_DIR  = $(APP_BASE)/Common_Controller/Source/LBI
+#APP_LBI_SRC_DIR  = $(APP_BASE)/Common_Controller/Source/LBI
 
 APP_COMMON_SRC_DIR  = $(APP_BASE)/Common/Source
 
@@ -167,8 +167,7 @@ APPSRC += pdum_apdu.S
 APPSRC += zps_gen.c
 APPSRC += app_timer_driver.c
 APPSRC += app_start_remote.c
-APPSRC += app_captouch_buttons.c
-APPSRC += DriverCapTouch.c
+APPSRC += app_buttons.c
 APPSRC += App_$(TARGET).c
 APPSRC += zll_remote_node.c
 APPSRC += ecb_decrypt.c
@@ -200,7 +199,7 @@ INCFLAGS += -I$(COMPONENTS_BASE_DIR)/Utilities/Include
 INCFLAGS += -I$(COMPONENTS_BASE_DIR)/ZCL/Include
 INCFLAGS += -I$(COMPONENTS_BASE_DIR)/OVLY/Include
 INCFLAGS += -I$(COMPONENTS_BASE_DIR)/ZCL/Clusters/LightLink/Include
-INCFLAGS += -I$(APP_LBI_SRC_DIR)
+#INCFLAGS += -I$(APP_LBI_SRC_DIR)
 
 
 ###############################################################################
@@ -247,7 +246,8 @@ LDLIBS := $(APPLDLIBS) $(LDLIBS)
 
 .PHONY: all clean
 # Path to directories containing application source
-vpath % $(APP_SRC_DIR):$(APP_COMMON_SRC_DIR):$(ZLL_SRC_DIRS):$(ZCL_SRC):$(UTIL_SRC_DIR):$(DEV_SRC_DIR):$(DUT_SRC_DIR):$(APP_LBI_SRC_DIR)
+vpath % $(APP_SRC_DIR):$(APP_COMMON_SRC_DIR):$(ZLL_SRC_DIRS):$(ZCL_SRC):$(UTIL_SRC_DIR):$(DEV_SRC_DIR):$(DUT_SRC_DIR)
+#:$(APP_LBI_SRC_DIR)
 
 
 all: $(DEV_BLD_DIR)/$(TARGET)_$(JENNIC_CHIP)$(BIN_SUFFIX).bin

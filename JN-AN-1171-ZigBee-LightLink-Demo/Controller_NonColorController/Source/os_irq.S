@@ -6,7 +6,7 @@
 #
 # COMPONENT:      os_irq.s
 #
-# DATE:           Fri Mar 19 23:06:51 2021
+# DATE:           Tue Mar 23 13:00:35 2021
 #
 # AUTHOR:         Jennic RTOS Configuration Tool
 #
@@ -75,7 +75,7 @@ os_ExternalException_W:
     .type   os_PIC_ChannelPriorities, @object
     .size   os_PIC_ChannelPriorities, 16
 os_PIC_ChannelPriorities:
-    .byte 14
+    .byte 0
     .byte 0
     .byte 1
     .byte 7
@@ -135,7 +135,7 @@ os_PIC_SwVectTable:
     .word os_UnclaimedInterrupt_W
     .word os_UnclaimedInterrupt_W
     .word os_UnclaimedInterrupt_W
-    .word os_APP_isrKeyScan_W
+    .word os_UnclaimedInterrupt_W
     .word os_APP_isrTickTimer_W
 
     .section .text,"ax"
@@ -175,22 +175,6 @@ os_zps_isrMAC_W:
     b.ja   os_ExternalException_R
 os_zps_isrMAC_J:
     b.ori  r3,r0,os_vzps_isrMAC
-    b.ja   os_vControlledIntCheck
-
-    .extern os_vAPP_isrKeyScan
-os_APP_isrKeyScan_W:
-    b.addi r1,r1,-8
-    b.sw   0(r1),r9
-    b.sw   4(r1),r5
-    b.ori  r4,r0,os_APP_isrKeyScan_J
-    b.ori  r5,r0,os_vControlledInterrupt
-    b.jal  os_CFunc_W
-    b.lwz  r9,0(r1)
-    b.lwz  r5,4(r1)
-    b.addi r1,r1,8
-    b.ja   os_ExternalException_R
-os_APP_isrKeyScan_J:
-    b.ori  r3,r0,os_vAPP_isrKeyScan
     b.ja   os_vControlledIntCheck
 
     .extern os_vAPP_isrTickTimer
